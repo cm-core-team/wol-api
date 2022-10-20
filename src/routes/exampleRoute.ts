@@ -6,7 +6,8 @@ import express from "express";
 const exampleRouter = express.Router();
 
 // This would usually go in the controllers folder as a separate module to be imported
-function routeHandler(): void {
+function routeHandler(req: any, res: any, next: Function): void {
+  res.status(200).json({ example: "Hello" });
   console.log("Hello");
 }
 

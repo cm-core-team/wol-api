@@ -7,6 +7,7 @@ import exampleRouter from "./routes/exampleRoute";
 // creating express app
 const app = express();
 
+// This is where we mount the routes
 app.use("api/v1", exampleRouter);
 
 // testing
