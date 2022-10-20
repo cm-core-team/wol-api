@@ -1,14 +1,12 @@
 // What a typical express route should look like
 import express from "express";
 
-// creating the router which is basically like a mini-application according to the express docs
-// http://expressjs.com/en/5x/api.html#router -> docs explains it a lot better than I ever will :|
+// Create router
 const exampleRouter = express.Router();
 
 // This would usually go in the controllers folder as a separate module to be imported
-function routeHandler(req: any, res: any, next: Function): void {
-  res.status(200).json({ example: "Hello" });
-  console.log("Hello");
+function routeHandler(): void {
+  console.log("Hello, World!");
 }
 
 // Mounting middleware on the route
