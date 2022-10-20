@@ -10,5 +10,8 @@
     "morgan": "^1.10.0",
     "typescript": "^4.8.4"
   },
+  "scripts": {
+    "route": "node scripts/generateTemplates/generateRoutes.ts"
+  },
   "type": "module"
 }
