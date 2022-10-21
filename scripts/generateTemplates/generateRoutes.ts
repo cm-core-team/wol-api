@@ -21,24 +21,24 @@ if (!isAcceptable) {
 const root = path.resolve("./");
 
 // Path, relative to the root of the project, to the routes folder
-const fullPath = path.join(root, "src/routes", routeName + ".ts");
+const routesPath = path.join(root, "src/routes", routeName + "Routes.ts");
+const controllerPath = path.join(root, "src/controllers", routeName + "Controller.ts");
 
-// Typical template for creating routes
-const template = `
+// Controller file relative to routes directory
+const relativeControllerFilename = path.join('../controllers', routeName + "Controller.js");
+
+// Typical template for routes
+const routesTemplate = `
 // Route for ${routeName}
 
 // What a typical express route should look like
-import express, { Request, Response } from "express";
+import express from "express";
+
+// Import handler from controller
+import routeHandler from '${relativeControllerFilename}';
 
 // Create router
-// Route name doesn't matter here
-// That's my bad
 const router = express.Router();
-
-// Typically handled into a controller folder
-function routeHandler(req: Request, res: Response, next: Function): void {
-  console.log("Hello, World!");
-}
 
 // Mounting middleware on the route
 router.use("/${routeName}/route", routeHandler);
@@ -52,13 +52,41 @@ router.use("/${routeName}/route", routeHandler);
 export default router;
 `;
 
-// Write file to destination
-fs.writeFile(fullPath, template, (err) => {
+// Typical template for controller
+const controllerTemplate = `
+// Controller for ${routeName}
+
+import { Request, Response } from "express";
+
+// Typically handled into a controller folder
+async function routeHandler(
+  req: Request,
+  res: Response,
+  next: Function): Promise<void> {
+  console.log("Hello, World!");
+}
+
+export default routeHandler;
+`;
+
+// Write to routes
+fs.writeFile(routesPath, routesTemplate, (err) => {
   if (err) {
-    // File writing failed
+    // Failure
     console.error(err);
   } else {
     // Success
-    console.info(routeName + " created successfully!");
+    console.info("Route created successfully!");
+  }
+});
+
+// Write to controller
+fs.writeFile(controllerPath, controllerTemplate, (err) => {
+  if (err) {
+    // Failure
+    console.error(err);
+  } else {
+    // Success
+    console.info("Controller created successfully!");
   }
 });
