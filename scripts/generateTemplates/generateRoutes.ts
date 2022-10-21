@@ -7,6 +7,15 @@ import path from 'path';
 
 const routeName = process.argv[2];
 
+// Regex to check if routeName is a valid name (doesn't contain special or numerical characters)
+const isAcceptable = /^[a-zA-Z]+$/.test(routeName);
+
+if (!isAcceptable)
+{
+    console.error('Invalid route name. Please enter something that doesn\'t contain numbers or special characters.');
+    process.exit(-1);
+}
+
 // Root of the project
 const root = path.resolve('./');
 
@@ -23,6 +32,7 @@ import express, { Request, Response } from "express";
 // Create router
 const ${routeName} = express.Router();
 
+// Typically handled into a controller folder
 function routeHandler(req: Request, res: Response, next: Function): void {
   console.log("Hello, World!");
 }
