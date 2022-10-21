@@ -41,7 +41,7 @@ function routeHandler(req: Request, res: Response, next: Function): void {
 }
 
 // Mounting middleware on the route
-${routeName}.use("/${routeName}/route", routeHandler);
+router.use("/${routeName}/route", routeHandler);
 
 // Finally exporting the router so that it can be mounted onto the express "app" instance
 // The name of the router doesnt matter here.

@@ -7,7 +7,7 @@ import morgan from "morgan";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
-import exampleRouter from "./routes/testRoute.js";
+import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
 
 // creating express app
 const app = express();
@@ -17,7 +17,7 @@ const app = express();
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
 // This is where we mount the routes
-app.use("api/v1/", exampleRouter);
+app.use("/api/v1/", bibleVerseRouter);
 
 // leave this for later
 // async function getVerse(): Promise<any> {
