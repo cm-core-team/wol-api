@@ -1,5 +1,9 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import fetch from "node-fetch";
+import morgan from "morgan";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
@@ -7,6 +11,10 @@ import exampleRouter from "./routes/testRoute.js";
 
 // creating express app
 const app = express();
+
+// logging software for development
+// logs http method, time it took to make request etc
+if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
 // This is where we mount the routes
 app.use("api/v1/", exampleRouter);
