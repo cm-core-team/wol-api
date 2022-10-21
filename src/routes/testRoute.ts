@@ -1,11 +1,11 @@
 
 // What a typical express route should look like
-import express from "express";
+import express, { Request, Response } from "express";
 
 // Create router
 const testRoute = express.Router();
 
-function routeHandler(): void {
+function routeHandler(req: Request, res: Response, next: Function): void {
   console.log("Hello, World!");
 }
 
