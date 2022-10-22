@@ -1,9 +1,8 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import express from "express";
-import fetch from "node-fetch";
 import morgan from "morgan";
+import express from "express";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself

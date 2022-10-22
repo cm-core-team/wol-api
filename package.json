@@ -18,7 +18,8 @@
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
     "compile": "tsc",
-    "start": "SET NODE_ENV=development&& node ./build/server.js"
+    "start": "node ./build/server.js",
+    "go": "npm run compile && npm start"
   },
   "type": "module"
 }

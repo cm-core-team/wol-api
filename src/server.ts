@@ -1,6 +1,8 @@
 import app from "./app.js";
 
+const PORT = 3000;
+
 // creating the server
-app.listen(3000, () => {
-  console.log("Server running");
+app.listen(PORT, () => {
+  console.log("Server running on http://localhost:" + PORT);
 });
