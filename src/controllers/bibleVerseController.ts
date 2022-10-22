@@ -13,19 +13,27 @@ async function getVerse(
     )
       .then((data) => data.text())
       .then((data) => parse(data));
-    console.log(html);
 
-    res.json({ data: `${html}` });
+    const verseNumber = parseInt(req.params.verse);
+    const idString = `p${verseNumber + 1}`;
+
+    const verse = html
+      .getElementsByTagName("p")
+      .filter(
+        (val) => val.id === idString && val.rawAttrs.includes(`class="sb"`)
+      )
+      // Map returns an array
+      .map((val) => {
+        const outputStr = val.text.replace(/[^a-zA-Z-.\s]/g, "").trim();
+        return outputStr;
+      });
+
+    res.json({ data: `${verse[0]}` });
   } catch (err) {
     console.error(err);
     next(err);
   }
 }
 
-function test(req: Request, res: Response, next: Function) {
-  res.json({ endpoint: "hit" });
-  console.log("Endpoint hit");
-}
-
 // exporting all the handler functions
-export { getVerse, test };
+export { getVerse };
