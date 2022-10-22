@@ -18,8 +18,10 @@ async function getVerse(
     const idString = `p${verseNumber + 1}`;
 
     const verse = html
+      // getting all the elements with the "p" tag
       .getElementsByTagName("p")
       .filter(
+        // matching the id to the right element
         (val) => val.id === idString && val.rawAttrs.includes(`class="sb"`)
       )
       // Map returns an array
@@ -28,7 +30,8 @@ async function getVerse(
         return outputStr;
       });
 
-    res.json({ data: `${verse[0]}` });
+    // sending response to the user
+    res.status(200).json({ data: `${verse[0]}` });
   } catch (err) {
     console.error(err);
     next(err);
