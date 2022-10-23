@@ -14,6 +14,8 @@ async function getVerse(
         if (err) {
           console.error(err);
           res.status(500).json({ error: "Server-side error, aborted request." });
+
+          next(err);
           return;
         }
 
