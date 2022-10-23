@@ -41,6 +41,7 @@ async function getVerse(
         const resultVerse = verse[0];
 
         if (!resultVerse) {
+          next(Error('Result is undefined!'));
           res.status(400).json({ error: "Invalid entry, please check your request and retry." });
           return;
         }
