@@ -38,7 +38,7 @@ async function getVerse(
         // sending response to the user
         const resultVerse = verse[0];
 
-        if (resultVerse == undefined) {
+        if (!resultVerse) {
           res.status(400).json({ error: "Invalid entry, please check your request and retry." });
           return;
         }
