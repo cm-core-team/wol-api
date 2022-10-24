@@ -8,5 +8,4 @@ node_modules
 # build files
 build
 
-# env
 .env
