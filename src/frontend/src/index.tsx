@@ -10,12 +10,16 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>  { /* Keep this so that we can be notified for buggy or suspicious code */}
+  <>
+    { /* Keep this so that we can be notified for buggy or suspicious code */}
+    <React.StrictMode>
 
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+      { /* For more info about react-router-dom, see: https://www.javatpoint.com/browserrouter-in-react */}
+      < BrowserRouter >
+        <App />
+      </BrowserRouter >
 
 
-  </React.StrictMode>
+    </React.StrictMode >
+  </>
 );
