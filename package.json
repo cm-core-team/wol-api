@@ -20,7 +20,8 @@
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
     "compile": "tsc",
-    "start": "node ./build/server.js",
+    "start": "node ./build/backend/server.js",
+    "start-frontend": "cd src && cd frontend && npm run start",
     "go": "npm run compile && npm start"
   },
   "type": "module"
