@@ -1,5 +1,7 @@
 ## TODO
 
+- Create React app for the front end... -> Jonathan
+
 ## Completed
 
 - Create route generator -> Jude
