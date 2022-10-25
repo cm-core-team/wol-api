@@ -21,8 +21,8 @@ if (!isAcceptable) {
 const root = path.resolve("./");
 
 // Path, relative to the root of the project, to the routes folder
-const routesPath = path.join(root, "src/routes", routeName + "Routes.ts");
-const controllerPath = path.join(root, "src/controllers", routeName + "Controller.ts");
+const routesPath = path.join(root, "src/backend/routes", routeName + "Routes.ts");
+const controllerPath = path.join(root, "src/backend/controllers", routeName + "Controller.ts");
 
 // Controller file relative to routes directory
 const relativeControllerFilename = path.join('../controllers', routeName + "Controller.js");
