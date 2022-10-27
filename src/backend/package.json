@@ -16,7 +16,6 @@
     "typescript": "^4.8.4"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "morgan": "^1.10.0"
   },
   "scripts": {
