@@ -11,12 +11,12 @@
     "express": "^4.18.2",
     "node-fetch": "^3.2.10",
     "node-html-parser": "^6.1.1",
-    "request": "^2.88.2",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "typescript": "^4.8.4"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "morgan": "^1.10.0"
   },
   "scripts": {

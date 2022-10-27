@@ -41,6 +41,7 @@ async function getVerse(
 
     // sending response to the user
     const resultVerse = verse[0];
+    console.log(verse);
 
     if (!resultVerse) {
       res.status(400).json({
