@@ -21,7 +21,7 @@ async function getVerse(
     const idString: string = `v${req.params.bookNumber}-${req.params.chapter}-${req.params.verse}-1`;
     console.log(idString);
 
-    const verse = data
+    const verse: string = data
       .getElementById(idString)
       // Remove non-alpha-whitespace characters e.g. <p>hello</p> => phellop
       .text.replace(/[0-9+*]/g, "")
