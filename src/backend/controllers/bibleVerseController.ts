@@ -27,9 +27,6 @@ async function getVerse(
       .text.replace(/[0-9+*]/g, "")
       .trim();
 
-    // sending response to the user
-    console.log(verse);
-
     if (!verse) {
       res.status(400).json({
         error: "Invalid entry, please check your request and retry.",
@@ -38,7 +35,8 @@ async function getVerse(
       return;
     }
 
-    res.status(200).json({ data: `${verse}` });
+    // sending response to the user
+    res.status(200).json({ data: verse });
   } catch (err) {
     console.error(err);
     next(err);
