@@ -1,6 +1,6 @@
 import bent from "bent";
 
-import { parse } from "node-html-parser";
+import { HTMLElement, parse } from "node-html-parser";
 import { Request, Response } from "express";
 import console from "console";
 
@@ -10,14 +10,14 @@ async function getVerse(
   next: Function
 ): Promise<void> {
   try {
-    const getString = await bent("string");
+    const getString: bent.RequestFunction<string> = await bent("string");
     // `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.bookNumber}/1#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
 
-    const responseString = await getString(
+    const responseString: string = await getString(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.bookNumber}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
     );
 
-    const data = parse(responseString);
+    const data: HTMLElement = parse(responseString);
     const idString: string = `v${req.params.bookNumber}-${req.params.chapter}-${req.params.verse}-1`;
     console.log(idString);
 
