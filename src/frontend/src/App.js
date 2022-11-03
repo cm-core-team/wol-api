@@ -1,5 +1,5 @@
 import "./App.css";
-import Verse from "./components/Verse";
+import Verse from "./components/Verse/Verse";
 
 function App() {
   return (
