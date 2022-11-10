@@ -4,26 +4,22 @@ import { HTMLElement, parse } from "node-html-parser";
 import { Request, Response } from "express";
 import console from "console";
 
+// get html function
+import getHTML from "../utils/getHTMLData";
+
 async function getVerse(
   req: Request,
   res: Response,
   next: Function
 ): Promise<void> {
   try {
-    // Creating a function which will return a string response from the url
-    const getString: bent.RequestFunction<string> = await bent("string");
-
-    // The string response from the website
-    const responseString: string = await getString(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.bookNumber}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
+    const data: HTMLElement = await getHTML(
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
     );
 
     // id for the html element
-    const idString: string = `v${req.params.bookNumber}-${req.params.chapter}-${req.params.verse}-1`;
+    const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
     console.log(idString);
-
-    // converting data into manipulatable html
-    const data: HTMLElement = parse(responseString);
 
     // extracting verse text with the id
     const verse: string = data
@@ -48,6 +44,12 @@ async function getVerse(
     console.error(err);
     next(err);
   }
+}
+
+async function getVersesAmount(req: Request, res: Response, next: Function) {
+  try {
+    const data = getHTML("");
+  } catch (err) {}
 }
 
 // exporting all the handler functions

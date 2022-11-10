@@ -12,7 +12,9 @@ import { getVerse } from "./../controllers/bibleVerseController.js";
 const router: Router = express.Router();
 
 // Mounting middleware on the route
-router.use("/bibleVerses/getVerse/:bookNumber/:chapter/:verse", getVerse);
+router.route("/bibleVerses/:book/:chapter/:verse").get(getVerse);
+
+router.route("/bibleVerses/getVersesAmount/:book/:chapter/:verse");
 
 // Finally exporting the router so that it can be mounted onto the express "app" instance
 // The name of the router doesnt matter here.
