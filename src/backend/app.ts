@@ -3,7 +3,7 @@ dotenv.config({ path: "./env" });
 
 import morgan from "morgan";
 
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 
 // secuirty packages
 import helmet from "helmet";
