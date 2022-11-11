@@ -10,7 +10,7 @@ import { getVerse } from "../../controllers/verseController";
 // A beautiful person helped here: https://gist.github.com/mastastealth/cd5e12f6c0960408a3ac.
 // And I put this into a Python interpreter and converted it all to lowercase and stripped spaces.
 // *Modern problems require modern solutions*
-var books = [
+const books = [
   'genesis',         'exodus',          'leviticus',     'numbers',
   'deuteronomy',     'joshua',          'judges',        'ruth',
   '1samuel',         '2samuel',         '1kings',        '2kings',
