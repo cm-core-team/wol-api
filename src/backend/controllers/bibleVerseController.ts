@@ -48,7 +48,9 @@ async function getVerse(
 
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
-    const data = getHTML("");
+    const data = await getHTML(
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
+    );
   } catch (err) {}
 }
 
