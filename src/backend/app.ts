@@ -2,7 +2,6 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./env" });
 
 import morgan from "morgan";
-import express from "express";
 
 import { Request, Response } from "express";
 
