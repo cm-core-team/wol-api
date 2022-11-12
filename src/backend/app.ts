@@ -12,6 +12,7 @@ import xss from "xss";
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
 import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
+import { homeController } from "./controllers/homeController.js";
 
 // creating express app
 const app = express();
@@ -40,6 +41,9 @@ const app = express();
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
 // This is where we mount the routes
+
+app.use("/home", homeController);
+
 app.use("/api/v1/", bibleVerseRouter);
 
 // exporting express app so it can be used by other modules
