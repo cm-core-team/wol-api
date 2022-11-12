@@ -9,12 +9,13 @@
     "bent": "^7.3.12",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "helmet": "^6.0.0",
     "node-fetch": "^3.2.10",
     "node-html-parser": "^6.1.1",
     "request": "^2.88.2",
     "ts-node": "^10.9.1",
-    "tsc": "^2.0.4",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "xss": "^1.0.14"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-    "compile": "tsc",
+    "compile": "npx tsc",
     "start": "node ./build/server.js",
     "go": "npm run compile && npm start"
   },

@@ -17,23 +17,23 @@ import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
 const app = express();
 
 // set secuirty headers
-app.use(helmet());
+// app.use(helmet());
 
 // protect from cross site scripting
 // app.use(xss());
 
 // policy headers
-app.use((req: Request, res: Response, next: Function) => {
-  // Middleware
-  // Ensure that the recipient is allowed to access the page
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+// app.use((req: Request, res: Response, next: Function) => {
+//   // Middleware
+//   // Ensure that the recipient is allowed to access the page
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
 
-  next();
-});
+//   next();
+// });
 
 // logging software for development
 // logs http method, time it took to make request etc

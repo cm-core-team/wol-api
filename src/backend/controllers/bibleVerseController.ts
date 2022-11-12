@@ -1,4 +1,6 @@
+import console from "console";
 import { Request, Response } from "express";
+import { HTMLElement } from "node-html-parser";
 
 import getHTML from "../utils/getHTMLData";
 
@@ -8,7 +10,7 @@ async function getVerse(
   next: Function
 ): Promise<void> {
   try {
-    const data = await getHTML(
+    const data: HTMLElement = await getHTML(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.bookNumber}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
     );
 
@@ -44,11 +46,21 @@ async function getVerse(
 
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
-    const data = await getHTML(
+    console.log(req.params.book, req.params.chapter);
+    const data: HTMLElement = await getHTML(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
     );
-  } catch (err) {}
+
+    const finalVerse: number = document.querySelectorAll(".v").length;
+
+    console.log(finalVerse);
+
+    res.status(200).json({ data: finalVerse });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
 }
 
 // exporting all the handler functions
-export { getVerse };
+export { getVerse, getVersesAmount };

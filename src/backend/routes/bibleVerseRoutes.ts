@@ -4,7 +4,10 @@
 import express, { Request, Response, Router } from "express";
 
 // importing the handler functions
-import { getVerse } from "./../controllers/bibleVerseController.js";
+import {
+  getVerse,
+  getVersesAmount,
+} from "./../controllers/bibleVerseController.js";
 
 // Create router
 // Route name doesn't matter here
@@ -14,7 +17,9 @@ const router: Router = express.Router();
 // Mounting middleware on the route
 router.route("/bibleVerses/:book/:chapter/:verse").get(getVerse);
 
-router.route("/bibleVerses/getVersesAmount/:book/:chapter/:verse");
+router
+  .route("/bibleVerses/getVersesAmount/:book/:chapter")
+  .get(getVersesAmount);
 
 // Finally exporting the router so that it can be mounted onto the express "app" instance
 // The name of the router doesnt matter here.
