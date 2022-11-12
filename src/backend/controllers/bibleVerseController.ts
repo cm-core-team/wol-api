@@ -1,6 +1,8 @@
 import console from "console";
 import { Request, Response } from "express";
-import { HTMLElement } from "node-html-parser";
+
+import bent from "bent";
+import { HTMLElement, parse } from "node-html-parser";
 
 import getHTML from "../utils/getHTMLData.js";
 
@@ -47,10 +49,13 @@ async function getVerse(
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
     console.log(req.params.book, req.params.chapter);
-    const data: HTMLElement = await getHTML(
+
+    const getString: bent.RequestFunction<string> = bent("string");
+    const resString: string = await getString(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
     );
 
+    const data: HTMLElement = await parse(resString);
     const finalVerse: number = document.querySelectorAll(".v").length;
 
     console.log(finalVerse);
