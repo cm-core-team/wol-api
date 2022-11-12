@@ -2,7 +2,7 @@ import console from "console";
 import { Request, Response } from "express";
 import { HTMLElement } from "node-html-parser";
 
-import getHTML from "../utils/getHTMLData";
+import getHTML from "../utils/getHTMLData.js";
 
 async function getVerse(
   req: Request,
