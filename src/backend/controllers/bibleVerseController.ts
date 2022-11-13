@@ -1,7 +1,7 @@
 import console from "console";
 import { Request, Response } from "express";
 
-import bent from "bent";
+import axios from "axios";
 import { HTMLElement, parse } from "node-html-parser";
 
 import getHTML from "../utils/getHTMLData.js";
@@ -18,7 +18,6 @@ async function getVerse(
 
     // id for the html element
     const idString: string = `v${req.params.bookNumber}-${req.params.chapter}-${req.params.verse}-1`;
-    console.log(idString);
 
     // getting the verse text
     const verse = data
@@ -38,19 +37,17 @@ async function getVerse(
     res.status(200).json({ data: `${verse}` });
   } catch (err) {
     // logging the error and sending error to next middleware
-    console.error(err);
+    // console.error(err);
     next(err);
   }
 }
 
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
+    console.log('\n\nPARAMS\n\n');
     console.log(req.params.book, req.params.chapter);
-
-    const getString: bent.RequestFunction<string> = bent("string");
-    const resString: string = await getString(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
-    );
+    const url = `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`;
+    const resString: string = parse(await axios.get(url)).text;
 
     const data: HTMLElement = await parse(resString);
     const finalVerse: number = document.querySelectorAll(".v").length;
