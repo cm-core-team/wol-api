@@ -22,6 +22,12 @@ const userSchema = new Schema({
     minLength: 8,
     // Needs to be encrypted
   },
+  passwordConfirm: {
+    type: String,
+    required: true,
+    minLength: 8,
+    // Needs to be checked against the password field to confirm that the password is correct
+  },
 });
 
 const User = new Model(userSchema, "user");
