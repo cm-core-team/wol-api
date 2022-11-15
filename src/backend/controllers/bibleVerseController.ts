@@ -44,13 +44,13 @@ async function getVerse(
 
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
-    console.log('\n\nPARAMS\n\n');
+    console.log("\n\nPARAMS\n\n");
     console.log(req.params.book, req.params.chapter);
     const url = `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`;
     const resString: string = parse(await axios.get(url)).text;
 
     const data: HTMLElement = await parse(resString);
-    const finalVerse: number = document.querySelectorAll(".v").length;
+    const finalVerse: number = data.querySelectorAll(".v").length;
 
     console.log(finalVerse);
 
