@@ -3,11 +3,7 @@ dotenv.config();
 
 import morgan from "morgan";
 
-import express, { Request, Response } from "express";
-
-// security packages
-// import helmet from "helmet";
-// import xss from "xss";
+import express from "express";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
@@ -19,12 +15,7 @@ import process from "process";
 const app = express();
 
 // set secuirty headers
-// app.use(helmet());
 
-// protect from cross site scripting
-// app.use(xss());
-
-// policy headers
 // app.use((req: Request, res: Response, next: Function) => {
 //   // Middleware
 //   // Ensure that the recipient is allowed to access the page
@@ -45,7 +36,7 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 // This is where we mount the routes
 
 // Routes which devs using the api are going to be physically interacting with.
-app.use("/home", homeController);
+// app.use("/home", homeController);
 
 app.use("/api/v1/", bibleVerseRouter);
 

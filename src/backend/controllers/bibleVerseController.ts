@@ -13,7 +13,7 @@ async function getVerse(
 ): Promise<void> {
   try {
     const data: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.bookNumber}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
     );
 
     // id for the html element
@@ -34,7 +34,7 @@ async function getVerse(
       return;
     }
 
-    res.status(200).json({ data: `${verse}` });
+    res.status(200).json({ data: verse });
   } catch (err) {
     // logging the error and sending error to next middleware
     // console.error(err);

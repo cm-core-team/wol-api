@@ -19,7 +19,6 @@ router.route("/bibleVerses/:book/:chapter/:verse").get(getVerse);
 
 router
   .route("/bibleVerses/getVersesAmount/:book/:chapter")
-  .get(getVersesAmount);
 
 // Finally exporting the router so that it can be mounted onto the express "app" instance
 // The name of the router doesnt matter here.
