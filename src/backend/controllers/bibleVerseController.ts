@@ -2,6 +2,7 @@ import console from "console";
 import { Request, Response } from "express";
 
 import axios from "axios";
+import bent from "bent";
 import { HTMLElement, parse } from "node-html-parser";
 
 import getHTML from "../utils/getHTMLData.js";
@@ -12,12 +13,13 @@ async function getVerse(
   next: Function
 ): Promise<void> {
   try {
+    console.log(req.params.book, req.params.chapter, req.params.verse);
     const data: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.bookNumber}:${req.params.chapter}:${req.params.verse}`
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
     );
 
     // id for the html element
-    const idString: string = `v${req.params.bookNumber}-${req.params.chapter}-${req.params.verse}-1`;
+    const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
     // getting the verse text
     const verse = data
@@ -46,11 +48,14 @@ async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
     console.log("\n\nPARAMS\n\n");
     console.log(req.params.book, req.params.chapter);
-    const url = `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`;
-    const resString: string = parse(await axios.get(url)).text;
 
-    const data: HTMLElement = await parse(resString);
-    const finalVerse: number = data.querySelectorAll(".v").length;
+    const getString = bent("string");
+    const html = await getString(
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
+    );
+    const data: HTMLElement = parse(html);
+    console.log(data);
+    const finalVerse = data.querySelectorAll(".v").length;
 
     console.log(finalVerse);
 
