@@ -1,7 +1,7 @@
 // Route for bibleVerseRoutes
 
 // What a typical express route should look like
-import express, { Request, Response, Router } from "express";
+import express, { Router } from "express";
 
 // importing the handler functions
 import {

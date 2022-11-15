@@ -9,12 +9,12 @@ async function getHTML(url: string): Promise<HTMLElement> {
 
     // getting the html
     console.log('[*] Requesting data from wol.jw.org...');
-    const responseString: string = await axios.get(url);
+    const responseString = await axios.get(url);
     console.log(responseString);
 
     console.log('[*] Parsing request...');
     // converting html string to actual html
-    const html: HTMLElement = parse(responseString);
+    const html: HTMLElement = parse(responseString.data);
 
     return html;
   } catch (err) {

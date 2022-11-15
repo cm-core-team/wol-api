@@ -5,7 +5,6 @@ import axios from "axios";
 import bent from "bent";
 import { HTMLElement, parse } from "node-html-parser";
 
-import getHTML from "../utils/getHTMLData.js";
 
 async function getVerse(
   req: Request,
@@ -13,10 +12,10 @@ async function getVerse(
   next: Function
 ): Promise<void> {
   try {
-    console.log(req.params.book, req.params.chapter, req.params.verse);
-    const data: HTMLElement = await getHTML(
+    const htmlData = await axios.get(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
     );
+    const data: HTMLElement = parse(htmlData.data);
 
     // id for the html element
     const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
@@ -38,30 +37,21 @@ async function getVerse(
 
     res.status(200).json({ data: verse });
   } catch (err) {
-    // logging the error and sending error to next middleware
-    // console.error(err);
+    res.status(400).json({ error: "Error on the server-side." })
     next(err);
   }
 }
 
 async function getVersesAmount(req: Request, res: Response, next: Function) {
   try {
-    console.log("\n\nPARAMS\n\n");
-    console.log(req.params.book, req.params.chapter);
-
-    const getString = bent("string");
-    const html = await getString(
+    const htmlData = await axios.get(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
     );
-    const data: HTMLElement = parse(html);
-    console.log(data);
+    const data: HTMLElement = parse(htmlData.data);
     const finalVerse = data.querySelectorAll(".v").length;
-
-    console.log(finalVerse);
 
     res.status(200).json({ data: finalVerse });
   } catch (err) {
-    console.error(err);
     next(err);
   }
 }
