@@ -5,9 +5,9 @@ import morgan from "morgan";
 
 import express, { Request, Response } from "express";
 
-// secuirty packages
-import helmet from "helmet";
-import xss from "xss";
+// security packages
+// import helmet from "helmet";
+// import xss from "xss";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
