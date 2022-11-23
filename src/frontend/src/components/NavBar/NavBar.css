@@ -62,3 +62,10 @@ div.navBar {
 
   color: #000000;
 }
+
+.gh-lnk {
+  position: absolute;
+  left: 1371px;
+
+  font-family: "Font Awesome 6 Brands";
+}
