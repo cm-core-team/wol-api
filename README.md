@@ -2,7 +2,7 @@
 
 ## So... what is this?
 
-Well, this is an api which let's the client request a verse from the [Watchtower Online Library](https://wol.jw.org/en/wol/h/r1/lp-e) website. ^_^
+Well, this is an api which lets the client request a verse from the [Watchtower Online Library](https://wol.jw.org/en/wol/h/r1/lp-e) website. ^_^
 
 ## Features
 
@@ -17,6 +17,7 @@ Possible ideas:
 
 - The obvious one, duhhh, would be to allow for different languages.
 - Maybe show the footnotes of the verses and cross references.
+- Check the discussions for more!
 
 ## Credits
 
