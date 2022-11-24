@@ -1,6 +1,6 @@
 /* nav bar */
 
-div.navBar {
+/* div.navBar {
   position: absolute;
   width: 1440px;
   height: 126px;
@@ -8,10 +8,10 @@ div.navBar {
   top: 0px;
 
   background: #d9d9d9;
-}
+} */
 
 /* home */
-.home-btn {
+/* .home-btn {
   position: absolute;
   width: 85px;
   height: 44px;
@@ -25,10 +25,10 @@ div.navBar {
   line-height: 45px;
 
   color: #000000;
-}
+} */
 
-.about-btn {
-  /* about */
+/* about */
+/* .about-btn {
 
   position: absolute;
   width: 110px;
@@ -43,10 +43,10 @@ div.navBar {
   line-height: 45px;
 
   color: #000000;
-}
+} */
 
-.gh-btn {
-  /* github */
+/* github */
+/* .gh-btn {
 
   position: absolute;
   width: 39px;
@@ -61,9 +61,19 @@ div.navBar {
   line-height: 34px;
 
   color: #000000;
+} */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./../../../public/JetBrainsMono-Regular.woff2");
 }
 
 .gh-lnk {
   position: absolute;
   left: 1371px;
+}
+
+.nav-bar {
+  font-family: JetBrains Mono;
+  font-style: normal;
 }

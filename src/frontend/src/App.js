@@ -14,7 +14,7 @@ function App() {
         ></script>
       </Helmet>
       <NavBar />
-      <Verse />
+      {/* <Verse />  I'm commenting this out for now as it's annoying me O_O*/}
     </div>
   );
 }
