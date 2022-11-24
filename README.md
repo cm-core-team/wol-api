@@ -2,12 +2,12 @@
 
 ## So... what is this?
 
-Well, this is an api which let's the client request a verse from the [Watchtower Online Library](https://wol.jw.org/en/wol/h/r1/lp-e) website. (‾◡◝)
+Well, this is an api which let's the client request a verse from the [Watchtower Online Library](https://wol.jw.org/en/wol/h/r1/lp-e) website. ^_^
 
 ## Features
 
 At the current moment in time this api only gets verses in a single language (English).
-And that's it really
+And that's it really... for now ^_~
 
 ## The Future?
 
@@ -15,8 +15,8 @@ Hopefully I can expand on this concept to something ✨ amazing ✨ which plenty
 
 Possible ideas:
 
-- The obvious one, duhhh, would be to allow for different languages
-- Maybe show the footnotes of the verses and cross references
+- The obvious one, duhhh, would be to allow for different languages.
+- Maybe show the footnotes of the verses and cross references.
 
 ## Credits
 
