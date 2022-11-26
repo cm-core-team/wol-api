@@ -19,6 +19,10 @@ Possible ideas:
 - Maybe show the footnotes of the verses and cross references.
 - Check the discussions for more!
 
+
+## API Documentation
+A simple overview of what this api does can be found @ https://documenter.getpostman.com/view/20386289/2s8YsrzENd
+
 ## Credits
 
 The one and only [@JudeDavis1](https://github.com/JudeDavis1)
