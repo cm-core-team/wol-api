@@ -10,11 +10,11 @@ function NavBar() {
   return (
     <Navbar bg="dark" expand="lg" variant="dark" className="nav-bar">
       <Container>
-        <Navbar.Brand href="#home">wol-api</Navbar.Brand>
+        <Navbar.Brand href="/home">wol-api</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">home</Nav.Link>
+            <Nav.Link href="/home">home</Nav.Link>
             <Nav.Link
               href="https://github.com/j-koziel/wol-api"
               target="_blank"
@@ -22,10 +22,10 @@ function NavBar() {
             >
               <i class="fa-brands fa-github"></i>
             </Nav.Link>
-            <Nav.Link href="#contact-me" className="contact-me-lnk">
+            <Nav.Link href="/contact-me" className="contact-me-lnk">
               contact me
             </Nav.Link>
-            <Nav.Link href="#login" className="login-lnk">
+            <Nav.Link href="/login" className="login-lnk">
               login
             </Nav.Link>
           </Nav>
