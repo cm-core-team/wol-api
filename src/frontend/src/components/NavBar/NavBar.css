@@ -1,79 +1,52 @@
-/* nav bar */
+/* general styling */
+.nav-bar {
+  background-color: #282828;
+}
 
-/* div.navBar {
-  position: absolute;
-  width: 1440px;
-  height: 126px;
-  left: 0px;
-  top: 0px;
+/* branding */
+.brand {
+  color: #458588;
+}
 
-  background: #d9d9d9;
-} */
+.brand:hover {
+  color: #83a598;
+}
 
-/* home */
-/* .home-btn {
-  position: absolute;
-  width: 85px;
-  height: 44px;
-  left: 47px;
-  top: 41px;
+/* nav links */
+.contact-lnk {
+  color: #458588;
+}
 
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 34px;
-  line-height: 45px;
+.contact-lnk:hover {
+  color: #83a598;
+}
 
-  color: #000000;
-} */
-
-/* about */
-/* .about-btn {
+.signup-lnk {
+  color: #458588;
 
   position: absolute;
-  width: 110px;
-  height: 46px;
-  left: 169px;
-  top: 41px;
+  left: 87%;
+}
+.signup-lnk:hover {
+  color: #83a598;
+}
 
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 34px;
-  line-height: 45px;
-
-  color: #000000;
-} */
-
-/* github */
-/* .gh-btn {
+.login-lnk {
+  color: #458588;
 
   position: absolute;
-  width: 39px;
-  height: 41px;
-  left: 1371px;
-  top: 44px;
-
-  font-family: "Font Awesome 6 Brands";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 34px;
-  line-height: 34px;
-
-  color: #000000;
-} */
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("./../../../public/JetBrainsMono-Regular.woff2");
+  left: 82%;
+}
+.login-lnk:hover {
+  color: #83a598;
 }
 
 .gh-lnk {
-  position: absolute;
-  left: 1371px;
-}
+  color: #458588;
 
-.nav-bar {
-  font-family: JetBrains Mono;
-  font-style: normal;
+  position: absolute;
+  left: 1337px;
+}
+.gh-lnk:hover {
+  color: #83a598;
 }
