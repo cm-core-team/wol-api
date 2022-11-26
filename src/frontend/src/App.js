@@ -1,21 +1,30 @@
+// styling
 import "./App.css";
-import Verse from "./components/Verse/Verse";
-import NavBar from "./components/NavBar/NavBar";
 
+// components
+import Verse from "./components/Verse/Verse";
+import Home from "./components/Home/Home";
+import NavBar from "./components/NavBar/NavBar";
+import Login from "./components/Login/Login";
+
+// bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// routing
+import { Routes, Route, Navigate } from "react-router";
+
+// misc
 import { Helmet } from "react-helmet";
 
 function App() {
   return (
-    <div className="App">
-      <Helmet>
-        <script
-          src="https://kit.fontawesome.com/13fdecaf2e.js"
-          crossorigin="anonymous"
-        ></script>
-      </Helmet>
-      <NavBar />
-      {/* <Verse />  I'm commenting this out for now as it's annoying me O_O*/}
-    </div>
+    <>
+      <Routes>
+        <Route element={<Navigate to="/home" />} path="/" />
+        <Route element={<Home />} path="/home" />
+        <Route element={<Login />} path="/login" />
+      </Routes>
+    </>
   );
 }
 

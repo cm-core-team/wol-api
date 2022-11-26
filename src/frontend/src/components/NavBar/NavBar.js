@@ -22,10 +22,12 @@ function NavBar() {
             >
               <i class="fa-brands fa-github"></i>
             </Nav.Link>
-            <Nav.Link href="#contact-me" className="contact-me">
+            <Nav.Link href="#contact-me" className="contact-me-lnk">
               contact me
             </Nav.Link>
-            <Nav.Link href="#gen-token">token?</Nav.Link>
+            <Nav.Link href="#login" className="login-lnk">
+              login
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
