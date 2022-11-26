@@ -12,7 +12,7 @@ import {
 // Create router
 // Route name doesn't matter here
 // That's my bad
-const router: Router = express.Router();
+const router: Router = Router();
 
 // Mounting middleware on the route
 router
