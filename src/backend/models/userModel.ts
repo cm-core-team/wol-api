@@ -31,6 +31,9 @@ const userSchema = new Schema({
     minLength: 8,
     // Needs to be encrypted
   },
+  apiToken: {
+    type: String,
+  },
 });
 
 const User = new Model(userSchema, "user");
