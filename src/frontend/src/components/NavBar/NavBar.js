@@ -16,6 +16,9 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link href="/demo" className="demo-lnk">
+              demo
+            </Nav.Link>
             <Nav.Link href="/contact" className="contact-lnk">
               contact
             </Nav.Link>
