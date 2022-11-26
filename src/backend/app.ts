@@ -14,20 +14,6 @@ import process from "process";
 // creating express app
 const app = express();
 
-// set secuirty headers
-
-// app.use((req: Request, res: Response, next: Function) => {
-//   // Middleware
-//   // Ensure that the recipient is allowed to access the page
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-
-//   next();
-// });
-
 // logging software for development
 // logs http method, time it took to make request etc
 console.log("The node environment is... ", process.env.NODE_ENV);
