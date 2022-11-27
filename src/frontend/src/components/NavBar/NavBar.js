@@ -8,9 +8,13 @@ import Navbar from "react-bootstrap/Navbar";
 
 function NavBar() {
   return (
-    <Navbar expand="lg" className="nav-bar">
+    <Navbar expand="lg" className="nav-bar" variant="dark">
       <Container>
-        <Navbar.Brand href="/home" className="brand">
+        <Navbar.Brand
+          href="/home"
+          className="custom-brand"
+          style={{ color: "#458588", hover: "#83a598" }}
+        >
           wol-api
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,7 +37,7 @@ function NavBar() {
               target="_blank"
               className="gh-lnk"
             >
-              <i class="fa-brands fa-github"></i>
+              <i className="fa-brands fa-github"></i>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
