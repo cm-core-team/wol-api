@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
+import Fade from "react-bootstrap/Fade";
 
 import "./Verse.css";
 import { getVerse } from "../../controllers/verseController";
@@ -84,6 +85,7 @@ function Verse() {
   const [book, setBook] = useState(0);
   const [chapter, setChapter] = useState(0);
   const [verse, setVerse] = useState(0);
+  const [textState, setTextState] = useState(false);
 
   return (
     <div className="verse">
@@ -113,6 +115,7 @@ function Verse() {
           setBook(book);
           setChapter(chapter);
           setVerse(verse);
+          setTextState(!textState);
 
           // Get the index of the bible book in the array.
           const versePromise = getVerse(
@@ -120,18 +123,17 @@ function Verse() {
             parseInt(chapter),
             parseInt(verse)
           )
-            .then((data) => setText(data))
+            .then((data) => {
+              setText(data);
+            })
             .catch((err) => console.error(err));
-
-          console.log(versePromise);
-
-          // setText(versePromise);
         }}
       >
         Submit
       </Button>
-
-      <h1>{"Verse:" + text}</h1>
+      <Fade in={textState} appear={true}>
+        <h1>{"Verse:" + text}</h1>
+      </Fade>
     </div>
   );
 }

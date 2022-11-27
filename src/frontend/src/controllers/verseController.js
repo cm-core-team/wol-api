@@ -6,9 +6,9 @@ const getVerse = async function (bookNum, chapter, verse) {
       `http://127.0.0.1:3001/api/v1/bibleVerses/getVerse/${bookNum}/${chapter}/${verse}`
     );
 
-    const text = await json.data;
+    const text = await json.data.data;
 
-    return text.data;
+    return text;
   } catch (err) {
     console.error(err);
   }
