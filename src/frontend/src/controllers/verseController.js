@@ -1,12 +1,16 @@
-import bent from "bent";
+import axios from "axios";
 
 const getVerse = async function (bookNum, chapter, verse) {
-  const getJSON = bent("json");
-  const obj = await getJSON(
-    `http://127.0.0.1:3001/api/v1/bibleVerses/getVerse/${bookNum}/${chapter}/${verse}`
-  );
-  const verseText = obj.data;
+  try {
+    const json = await axios.get(
+      `http://127.0.0.1:3001/api/v1/bibleVerses/getVerse/${bookNum}/${chapter}/${verse}`
+    );
 
-  return verseText;
+    const text = await json.data;
+
+    return text.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 export { getVerse };

@@ -15,16 +15,32 @@ import process from "process";
 // creating express app
 const app = express();
 
-// logging software for development
-// logs http method, time it took to make request etc
-console.log("The node environment is... ", process.env.NODE_ENV);
+// Add headers
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  // Pass to next layer of middleware
+  next();
+});
+
+/**
+ * logging software for development
+ * logs http method, time it took to make request etc
+ */
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
-// This is where we mount the routes
-
-// Routes which devs using the api are going to be physically interacting with.
-// app.use("/home", homeController);
-
+/**
+ * // This is where we mount the routes
+ * Routes which devs using the api are going to be physically interacting with.
+ * app.use("/home", homeController);
+ */
 app.use("/api/v1/", bibleVerseRouter);
 app.use("/api/v1/users", userRouter);
 
