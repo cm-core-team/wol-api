@@ -26,3 +26,4 @@ A simple overview of what this api does can be found @ https://documenter.getpos
 ## Credits
 
 The one and only [@JudeDavis1](https://github.com/JudeDavis1)
+
