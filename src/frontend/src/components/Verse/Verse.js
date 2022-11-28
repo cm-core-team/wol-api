@@ -95,10 +95,11 @@ function Verse() {
       <br />
       <input placeholder="Verse" className="verse-input field" />
       <br />
-
       <Button
         variant="primary"
         onClick={() => {
+          setTextState(false);
+
           const book = document
             .getElementsByClassName("book-input")[0]
             .value.replace(" ", "")
@@ -115,7 +116,6 @@ function Verse() {
           setBook(book);
           setChapter(chapter);
           setVerse(verse);
-          setTextState(!textState);
 
           // Get the index of the bible book in the array.
           const versePromise = getVerse(
@@ -125,14 +125,16 @@ function Verse() {
           )
             .then((data) => {
               setText(data);
+              // setTextState(true);
+              setTextState(true);
             })
             .catch((err) => console.error(err));
         }}
       >
         Submit
       </Button>
-      <Fade in={textState} appear={true}>
-        <h1>{"Verse:" + text}</h1>
+      <Fade in={textState}>
+        <h1>{text}</h1>
       </Fade>
     </div>
   );
