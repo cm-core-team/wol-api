@@ -109,8 +109,8 @@ function Verse() {
           const versePromise = axios.get(
             `http://localhost:3001/api/v1/bibleVerses/getVerse/${books.indexOf(book) + 1}/${chapter}/${verse}`
           )
-            .then((data) => {
-              setText(data);
+            .then((res) => {
+              setText(res.data.data);
               // setTextState(true);
               setTextState(true);
             })
