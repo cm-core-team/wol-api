@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Fade from "react-bootstrap/Fade";
+import axios from 'axios';
 
 import "./Verse.css";
 import { getVerse } from "../../controllers/verseController";
@@ -89,39 +90,24 @@ function Verse() {
 
   return (
     <div className="verse">
-      <input placeholder="Book" className="book-input field" />
+      <input placeholder="Book" className="book-input field" onChange={(e) => setBook(e.target.value.replace(" ", "")
+            .toLowerCase())} />
       <br />
-      <input placeholder="Chapter" className="chapter-input field" />
+      <input placeholder="Chapter" className="chapter-input field" onChange={(e) => setChapter(e.target.value.replace(" ", "")
+            .toLowerCase())} />
       <br />
-      <input placeholder="Verse" className="verse-input field" />
+      <input placeholder="Verse" className="verse-input field" onChange={(e) => setVerse(e.target.value.replace(" ", "")
+            .toLowerCase())} />
       <br />
       <Button
         variant="primary"
         onClick={() => {
           setTextState(false);
-
-          const book = document
-            .getElementsByClassName("book-input")[0]
-            .value.replace(" ", "")
-            .toLowerCase();
-          const chapter = document
-            .getElementsByClassName("chapter-input")[0]
-            .value.replace(" ", "")
-            .toLowerCase();
-          const verse = document
-            .getElementsByClassName("verse-input")[0]
-            .value.replace(" ", "")
-            .toLowerCase();
-
-          setBook(book);
-          setChapter(chapter);
-          setVerse(verse);
+          console.log(book, chapter, verse);
 
           // Get the index of the bible book in the array.
-          const versePromise = getVerse(
-            books.indexOf(book) + 1,
-            parseInt(chapter),
-            parseInt(verse)
+          const versePromise = axios.get(
+            `http://localhost:3001/api/v1/bibleVerses/getVerse/${books.indexOf(book) + 1}/${chapter}/${verse}`
           )
             .then((data) => {
               setText(data);

@@ -3,58 +3,12 @@
   background-color: #282828;
 }
 
-/* branding */
-.custom-brand {
+.nav-lnk {
   color: #458588 !important;
 }
 
-.custom-brand:hover {
+.nav-lnk:hover {
   color: #83a598 !important;
 }
 
-/* nav links */
-.contact-lnk {
-  color: #458588 !important;
-}
 
-.contact-lnk:hover {
-  color: #83a598 !important;
-}
-
-.signup-lnk {
-  color: #458588 !important;
-
-  position: absolute;
-  left: 87%;
-}
-.signup-lnk:hover {
-  color: #83a598 !important;
-}
-
-.login-lnk {
-  color: #458588 !important;
-
-  position: absolute;
-  left: 82%;
-}
-.login-lnk:hover {
-  color: #83a598 !important;
-}
-
-.gh-lnk {
-  color: #458588 !important;
-
-  position: absolute;
-  left: 1337px;
-}
-.gh-lnk:hover {
-  color: #83a598 !important;
-}
-
-.demo-lnk {
-  color: #458588 !important;
-}
-
-.demo-lnk:hover {
-  color: #83a598 !important;
-}

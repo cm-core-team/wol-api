@@ -36,8 +36,8 @@ async function getVerse(
     }
 
     res.status(200).json({ data: verse });
-  } catch (err) {
-    res.status(400).json({ error: "Error on the server-side." })
+  } catch (err: any) {
+    res.status(400).json({ error: "Error on the server-side. " + err.message });
     next(err);
   }
 }
