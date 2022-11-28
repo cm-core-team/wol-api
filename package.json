@@ -20,7 +20,7 @@
   },
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-    "compile": "tsc",
+    "compile": "cd src && tsc",
     "start": "nodemon ./build/server.js",
     "go": "npm run compile && npm start"
   },
