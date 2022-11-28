@@ -1,9 +1,0 @@
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("../public/JetBrainsMono-Regular.woff2");
-}
-
-.app-div {
-  font-family: JetBrains Mono;
-  font-style: normal;
-}
