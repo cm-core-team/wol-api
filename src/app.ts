@@ -34,7 +34,11 @@ app.use(function (req, res, next) {
  * logging software for development
  * logs http method, time it took to make request etc
  */
-if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+} else {
+  app.use(morgan(":method :url :status"));
+}
 
 /**
  * // This is where we mount the routes
