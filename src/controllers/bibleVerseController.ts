@@ -1,10 +1,9 @@
 import console from "console";
 import { Request, Response } from "express";
 
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import bent from "bent";
 import { HTMLElement, parse } from "node-html-parser";
-
 
 async function getVerse(
   req: Request,
@@ -12,7 +11,7 @@ async function getVerse(
   next: Function
 ): Promise<void> {
   try {
-    const htmlData = await axios.get(
+    const htmlData: AxiosResponse<any, any> = await axios.get(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
     );
     const data: HTMLElement = parse(htmlData.data);
@@ -21,7 +20,7 @@ async function getVerse(
     const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
     // getting the verse text
-    const verse = data
+    const verse: string = data
       .getElementById(idString)
       // Remove non-alpha-whitespace characters e.g. <p>hello</p> => phellop
       .text.replace(/[0-9+*]/g, "")
@@ -42,9 +41,13 @@ async function getVerse(
   }
 }
 
-async function getVersesAmount(req: Request, res: Response, next: Function) {
+async function getVersesAmount(
+  req: Request,
+  res: Response,
+  next: Function
+): Promise<void> {
   try {
-    const htmlData = await axios.get(
+    const htmlData: AxiosResponse<any, any> = await axios.get(
       `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
     );
     const data: HTMLElement = parse(htmlData.data);

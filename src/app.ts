@@ -1,19 +1,19 @@
+// dev stuff
 import * as dotenv from "dotenv";
-dotenv.config();
-
+dotenv.config({ path: "./build/.env" });
 import morgan from "morgan";
 
-import express from "express";
+// express
+import express, { Express } from "express";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
 import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import { homeController } from "./controllers/homeController.js";
-import process from "process";
 
 // creating express app
-const app = express();
+const app: Express = express();
 
 // Add headers
 app.use(function (req, res, next) {
@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === "development") {
  * Routes which devs using the api are going to be physically interacting with.
  * app.use("/home", homeController);
  */
+// app.use("/", homeController);
 app.use("/api/v1/", bibleVerseRouter);
 app.use("/api/v1/users", userRouter);
 

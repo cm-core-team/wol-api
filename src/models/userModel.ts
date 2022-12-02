@@ -1,9 +1,9 @@
-import { Schema, Model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 // validation tools
 import * as EmailValidator from "email-validator";
 
-const userSchema = new Schema({
+const userSchema: Schema = new Schema({
   firstName: {
     type: String,
     required: [true, "A first name is required for a user to be created."],
@@ -28,7 +28,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "A password is required for a user to be created."],
-    minLength: 8,
     // Needs to be encrypted
   },
   apiToken: {
@@ -36,6 +35,25 @@ const userSchema = new Schema({
   },
 });
 
-const User = new Model(userSchema, "user");
+const User: mongoose.Model<
+  {
+    [x: string]: any;
+  },
+  {},
+  {},
+  {},
+  Schema<
+    any,
+    mongoose.Model<any, any, any, any, any>,
+    {},
+    {},
+    {},
+    {},
+    "type",
+    {
+      [x: string]: any;
+    }
+  >
+> = mongoose.model("User", userSchema);
 
 export default User;
