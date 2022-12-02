@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 /**
- * // This is where we mount the routes
+ * This is where we mount the routes
  * Routes which devs using the api are going to be physically interacting with.
  * app.use("/home", homeController);
  */

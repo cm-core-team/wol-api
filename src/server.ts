@@ -5,6 +5,7 @@ dotenv.config({ path: "./build/.env" });
 // importing the express app to create the server
 import app from "./app.js";
 
+
 // some error handling
 process.on("uncaughtException", (err: Error) => {
   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
@@ -28,6 +29,7 @@ mongoose
 // starting the server
 const server = app.listen(PORT, (): void => {
   console.log("Server running on http://localhost:" + PORT);
+
 });
 
 // more error handling
