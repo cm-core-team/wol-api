@@ -5,6 +5,13 @@ import { Request, Response } from "express";
 
 import User from "../models/userModel.js";
 
+interface UserBody {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 async function getAllUsers(
   req: Request,
   res: Response,
@@ -38,7 +45,13 @@ async function createUser(
   next: Function
 ): Promise<void> {
   try {
-    const user: any = await User.create(req.body);
+    const { firstName, lastName, email, password }: UserBody = req.body;
+    const user: any = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
 
     res.status(200).json({
       data: user,
