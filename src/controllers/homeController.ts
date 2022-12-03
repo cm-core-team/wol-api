@@ -1,6 +1,10 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 
-async function homeController(req: Request, res: Response, next: Function) {
+async function homeController(
+  req: Request,
+  res: Response,
+  next: Function
+): Promise<void> {
   try {
     res.status(200).send("Welcome to the wol-api.");
   } catch (err) {
