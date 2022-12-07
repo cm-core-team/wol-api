@@ -26,6 +26,7 @@ A simple overview of what this api does can be found @ https://documenter.getpos
 ## Deployment
 
 This app is deployed on [Render](https://render.com/).
+https://wol-api.onrender.com/
 
 ## Credits
 
