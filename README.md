@@ -25,13 +25,7 @@ A simple overview of what this api does can be found @ https://documenter.getpos
 
 ## Deployment
 
-To deploy this to Google Cloud please first make your changes in the dev branch and make a pull request to the production branch so that changes can be reviewed and approved.
-
-Once the change has been approved, you can deploy the app with the command `gcloud deploy app`. To do this you need to have the [GC CLI tools](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe) installed and initialised to your account.
-
-### App Status
-
-❌ **DISABLED** ❌
+This app is deployed on [Render](https://render.com/).
 
 ## Credits
 
