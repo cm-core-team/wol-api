@@ -24,10 +24,10 @@
   },
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-    "compile": "cd src && tsc",
-    "start:dev": "nodemon ./build/server.js",
+    "compile": "rm -rf build && tsc",
+    "start:dev": "nodemon ./build/src/server.js",
     "start:prod": "node ./build/server.js",
-    "test": "jest",
+    "test": "jest --silent",
     "go": "npm run compile && npm start:dev"
   },
   "type": "module"

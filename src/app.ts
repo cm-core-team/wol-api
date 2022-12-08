@@ -1,6 +1,6 @@
 // dev stuff
 import * as dotenv from "dotenv";
-dotenv.config({ path: "./build/.env" });
+dotenv.config();
 import morgan from "morgan";
 
 // express

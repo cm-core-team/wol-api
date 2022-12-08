@@ -35,25 +35,6 @@ const userSchema: Schema = new Schema({
   },
 });
 
-const User: mongoose.Model<
-  {
-    [x: string]: any;
-  },
-  {},
-  {},
-  {},
-  Schema<
-    any,
-    mongoose.Model<any, any, any, any, any>,
-    {},
-    {},
-    {},
-    {},
-    "type",
-    {
-      [x: string]: any;
-    }
-  >
-> = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

@@ -4,6 +4,13 @@ import axios, { AxiosResponse } from "axios";
 
 import { HTMLElement, parse } from "node-html-parser";
 
+const getVerseText = (data: HTMLElement, id: string) => {
+  return data.getElementById(id)
+      // Remove non-alpha-whitespace characters e.g. <p>hello</p> => phellop
+      .text.replace(/[0-9+*]/g, "")
+      .trim();
+}
+
 async function getVerse(
   req: Request,
   res: Response,
@@ -19,11 +26,7 @@ async function getVerse(
     const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
     // getting the verse text
-    const verse: string = data
-      .getElementById(idString)
-      // Remove non-alpha-whitespace characters e.g. <p>hello</p> => phellop
-      .text.replace(/[0-9+*]/g, "")
-      .trim();
+    const verse: string = getVerseText(data, idString);
 
     if (!verse) {
       res.status(400).json({
@@ -59,4 +62,9 @@ async function getVersesAmount(
 }
 
 // exporting all the handler functions
-export { getVerse, getVersesAmount };
+export {
+  getVerse,
+  getVersesAmount,
+
+  getVerseText
+};

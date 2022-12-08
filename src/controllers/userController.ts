@@ -17,18 +17,8 @@ async function getAllUsers(
   res: Response,
   next: Function
 ): Promise<void> {
-  try {
-    const users: (Document<
-      unknown,
-      any,
-      {
-        [x: string]: any;
-      }
-    > & {
-      [x: string]: any;
-    } & Required<{
-        _id: unknown;
-      }>)[] = await User.find();
+  try {  // TODO:
+    const users = await User.find();
 
     res.status(200).json({
       results: users.length,
