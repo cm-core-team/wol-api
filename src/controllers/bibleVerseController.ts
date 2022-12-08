@@ -1,8 +1,7 @@
-import console from "console";
 import { Request, Response } from "express";
 
 import axios, { AxiosResponse } from "axios";
-import bent from "bent";
+
 import { HTMLElement, parse } from "node-html-parser";
 
 async function getVerse(

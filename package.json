@@ -30,6 +30,5 @@
     "test": "jest",
     "go": "npm run compile && npm start:dev"
   },
-  "type": "module",
-  "transform": {}
+  "type": "module"
 }
