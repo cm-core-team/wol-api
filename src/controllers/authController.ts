@@ -18,7 +18,7 @@ async function protect(
   }
 }
 
-async function loginUser(
+async function login(
   req: Request,
   res: Response,
   next: Function
@@ -34,7 +34,7 @@ async function loginUser(
   }
 }
 
-async function signupUser(
+async function signup(
   req: Request,
   res: Response,
   next: Function
@@ -50,4 +50,4 @@ async function signupUser(
   }
 }
 
-export { protect, loginUser, signupUser };
+export { protect, login, signup };

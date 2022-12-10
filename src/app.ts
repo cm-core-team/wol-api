@@ -8,9 +8,9 @@ import express, { Express, Request, Response } from "express";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
-import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
-import userRouter from "./routes/userRoutes.js";
-import { homeController } from "./controllers/homeController.js";
+import bibleVerseRouter from "./routes/bibleVerseRoutes";
+import userRouter from "./routes/userRoutes";
+import { homeController } from "./controllers/homeController";
 
 // creating express app
 const app: Express = express();

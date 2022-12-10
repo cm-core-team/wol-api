@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./build/.env" });
 
 // importing the express app to create the server
-import app from "./app.js";
+import app from "./app";
 
 // db
 import * as mongoose from "mongoose";
@@ -24,6 +24,8 @@ mongoose
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.vmbese9.mongodb.net/?retryWrites=true&w=majority`
   )
   .then((): void => console.log("Database has been connected."));
+
+mongoose.set("strictQuery", true);
 
 // starting the server
 const server = app.listen(PORT, (): void => {

@@ -3,7 +3,7 @@ import { Document } from "mongoose";
 
 import { Request, Response } from "express";
 
-import User from "../models/userModel.js";
+import User from "../models/userModel";
 
 interface UserBody {
   firstName: string;
@@ -17,7 +17,8 @@ async function getAllUsers(
   res: Response,
   next: Function
 ): Promise<void> {
-  try {  // TODO:
+  try {
+    // TODO:
     const users = await User.find();
 
     res.status(200).json({

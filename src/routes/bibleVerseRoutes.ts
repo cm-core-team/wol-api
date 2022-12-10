@@ -7,7 +7,7 @@ import { Router } from "express";
 import {
   getVerse,
   getVersesAmount,
-} from "./../controllers/bibleVerseController.js";
+} from "./../controllers/bibleVerseController";
 
 // Create router
 // Route name doesn't matter here
