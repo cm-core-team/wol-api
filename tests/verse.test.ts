@@ -39,6 +39,8 @@ test("Test that the verse is correct. 📖", async (): Promise<void> => {
     ids[4]
   );
 
+  // responses directly from the api
+  // made multiple requests to make sure that all the verses are correct
   const response1 = await request(app).get(
     "/api/v1/bibleVerses/getVerse/1/1/1"
   );
@@ -55,6 +57,7 @@ test("Test that the verse is correct. 📖", async (): Promise<void> => {
     "/api/v1/bibleVerses/getVerse/40/24/7"
   );
 
+  // comparing api response to whatever is seen on the wol website
   expect(response1.body.data).toBe(verseTest1);
   expect(response2.body.data).toBe(verseTest2);
   expect(response3.body.data).toBe(verseTest3);
