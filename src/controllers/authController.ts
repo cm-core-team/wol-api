@@ -1,4 +1,4 @@
-import { Request } from "express";
+import { Request, Response } from "express";
 
 // protect middleware to protect routes from unauthorized requests from the wrong type of user
 async function protect(

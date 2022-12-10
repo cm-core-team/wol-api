@@ -3,7 +3,7 @@ import { Document } from "mongoose";
 
 import { Request, Response } from "express";
 
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 
 interface UserBody {
   firstName: string;

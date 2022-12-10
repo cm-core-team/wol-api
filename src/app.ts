@@ -8,9 +8,9 @@ import express, { Express, Request, Response } from "express";
 
 // importing the router
 // When making local imports its important to add the .js extension because node is not smart enough to figure it out by itself
-import bibleVerseRouter from "./routes/bibleVerseRoutes";
-import userRouter from "./routes/userRoutes";
-import { homeController } from "./controllers/homeController";
+import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+import { homeController } from "./controllers/homeController.js";
 
 // creating express app
 const app: Express = express();
@@ -49,6 +49,8 @@ process.env.NODE_ENV === "development"
 app.use("/api/v1/", bibleVerseRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/", homeController);
+
+console.log("helfjsihfui");
 
 // exporting express app so it can be used by other modules
 export default app;

@@ -3,4 +3,5 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   extensionsToTreatAsEsm: [".ts"],
+  resolver: "jest-ts-webcompat-resolver",
 };
