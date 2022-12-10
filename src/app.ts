@@ -50,7 +50,5 @@ app.use("/api/v1/", bibleVerseRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/", homeController);
 
-console.log("helfjsihfui");
-
 // exporting express app so it can be used by other modules
 export default app;
