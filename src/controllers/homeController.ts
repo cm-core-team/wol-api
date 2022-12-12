@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 
+// Handler for the root route.
 async function homeController(
   req: Request,
   res: Response,

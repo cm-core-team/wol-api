@@ -5,7 +5,7 @@ import request from "supertest";
 
 import { getVerseText } from "../src/controllers/bibleVerseController";
 
-jest.setTimeout(10000000);
+jest.setTimeout(6000);
 
 test("Test that the verse is correct. 📖", async (): Promise<void> => {
   // ids for the html element
@@ -41,19 +41,19 @@ test("Test that the verse is correct. 📖", async (): Promise<void> => {
 
   // responses directly from the api
   // made multiple requests to make sure that all the verses are correct
-  const response1 = await request(app).get(
+  const response1: request.Response = await request(app).get(
     "/api/v1/bibleVerses/getVerse/1/1/1"
   );
-  const response2 = await request(app).get(
+  const response2: request.Response = await request(app).get(
     "/api/v1/bibleVerses/getVerse/59/4/8"
   );
-  const response3 = await request(app).get(
+  const response3: request.Response = await request(app).get(
     "/api/v1/bibleVerses/getVerse/66/21/4"
   );
-  const response4 = await request(app).get(
+  const response4: request.Response = await request(app).get(
     "/api/v1/bibleVerses/getVerse/19/37/11"
   );
-  const response5 = await request(app).get(
+  const response5: request.Response = await request(app).get(
     "/api/v1/bibleVerses/getVerse/40/24/7"
   );
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-// protect middleware to protect routes from unauthorized requests from the wrong type of user
+// Protect middleware to protect routes from unauthorized requests from the wrong type of user.
 async function protect(
   req: Request,
   res: Response,
@@ -18,6 +18,7 @@ async function protect(
   }
 }
 
+// Middleware to log users in if their credentials are correct.
 async function login(
   req: Request,
   res: Response,
@@ -34,6 +35,7 @@ async function login(
   }
 }
 
+// Middleware to sign users up and log them in.
 async function signup(
   req: Request,
   res: Response,

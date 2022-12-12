@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 // validation tools
 import * as EmailValidator from "email-validator";
 
+// Blueprint for all the users.
 const userSchema: Schema = new Schema({
   firstName: {
     type: String,
@@ -35,6 +36,7 @@ const userSchema: Schema = new Schema({
   },
 });
 
+// Model which will be used in the user controller.
 const User = mongoose.model("User", userSchema);
 
 export default User;

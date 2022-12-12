@@ -1,9 +1,10 @@
+// Welcome to the controller for bibleVerses
+
 import { Request, Response } from "express";
-
 import axios, { AxiosResponse } from "axios";
-
 import { HTMLElement, parse } from "node-html-parser";
 
+// Helper function to get the verse text.
 const getVerseText = async (url: string, id: string): Promise<string> => {
   try {
     // parsing the html
@@ -16,10 +17,12 @@ const getVerseText = async (url: string, id: string): Promise<string> => {
       .text.replace(/[0-9+*]/g, "")
       .trim();
   } catch (err) {
+    // throw error which will be caught by "next" function
     throw err;
   }
 };
 
+// Handler for getting a single verse.
 async function getVerse(
   req: Request,
   res: Response,
@@ -40,7 +43,6 @@ async function getVerse(
         error: "Invalid entry, please check your request and retry.",
       });
       next(Error("Result is undefined!"));
-      return;
     }
 
     res.status(200).json({ data: verse });
