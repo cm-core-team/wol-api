@@ -33,11 +33,9 @@
   },
   "scripts": {
     "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-    "compile": "tsc",
     "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/server.ts",
     "start:prod": "ts-node-esm ./src/server.ts",
-    "test": "jest --silent",
-    "go": "npm run compile && npm run start:dev"
+    "test": "jest --silent"
   },
   "type": "module"
 }
