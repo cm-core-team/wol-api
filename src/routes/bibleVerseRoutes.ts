@@ -4,8 +4,8 @@ import { Router } from "express";
 
 // Handlers
 import {
-  getVerse,
-  getVersesAmount,
+    getVerse,
+    getVersesAmount,
 } from "./../controllers/bibleVerseController.js";
 
 const router: Router = Router();
