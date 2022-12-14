@@ -15,13 +15,21 @@ Hopefully I can expand on this concept to something ✨ amazing ✨ which plenty
 
 Possible ideas:
 
-- The obvious one, duhhh, would be to allow for different languages.
-- Maybe show the footnotes of the verses and cross references.
-- Check the discussions for more!
+-   The obvious one, duhhh, would be to allow for different languages.
+-   Maybe show the footnotes of the verses and cross references.
+-   Check the discussions for more!
 
 ## API Documentation
 
 A simple overview of what this api does can be found @ https://documenter.getpostman.com/view/20386289/2s8YsrzENd
+
+## Contributing
+
+After making changes please make sure you run this command => `npm run lint`
+
+Please address any errors or warnings which appear due to this command. Warnings can mostly be ignored and just serve as reminders to get rid of any unnecessary logs or "any" typings.
+
+This will ensure that the code is consistent and will generally keep the codebase clean.
 
 ## Deployment
 
