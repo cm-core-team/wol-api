@@ -4,6 +4,8 @@
 
 Well, this is an api which lets the client request a verse from the [Watchtower Online Library](https://wol.jw.org/en/wol/h/r1/lp-e) website. ^\_^
 
+Just to make completely clear this is not made by the organisation but rather this is just something that I thought was a good idea and hence am working on. :)
+
 ## Features
 
 At the current moment in time this api only gets verses in a single language (English).
