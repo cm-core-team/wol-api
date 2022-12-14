@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/userModel.js";
 
-// Typings for user request body
+/**
+ * Interface for the request body of new users.
+ *
+ * @interface
+ */
 interface UserBody {
     firstName: string;
     lastName: string;
@@ -9,7 +13,15 @@ interface UserBody {
     password: string;
 }
 
-// Returns all the users currently stored in the DB.
+/**
+ * Returns all the users from the database.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function getAllUsers(
     req: Request,
     res: Response,
@@ -28,7 +40,15 @@ async function getAllUsers(
     }
 }
 
-// Creates a new user and stores it on the DB.
+/**
+ * Creates a new user and stores it on the DB.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function createUser(
     req: Request,
     res: Response,

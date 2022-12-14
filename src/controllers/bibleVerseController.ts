@@ -4,7 +4,14 @@ import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
 import { HTMLElement, parse } from "node-html-parser";
 
-// Helper function to get the verse text.
+/**
+ * Helper function to get the verse text from WOL.
+ *
+ * @async
+ *
+ * @param url This is the url for the required verse.
+ * @param id The HTML id attribute value for the verse.
+ */
 const getVerseText = async (url: string, id: string): Promise<string> => {
     // Parsing the html
     const html: AxiosResponse<any, any> = await axios.get(url);
@@ -17,7 +24,15 @@ const getVerseText = async (url: string, id: string): Promise<string> => {
         .trim();
 };
 
-// Handler for getting a single verse.
+/**
+ * Handler for getting a single verse
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function getVerse(
     req: Request,
     res: Response,
@@ -47,6 +62,15 @@ async function getVerse(
     }
 }
 
+/**
+ * Handler for getting the amount of verses of a certain chapter.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function getVersesAmount(
     req: Request,
     res: Response,

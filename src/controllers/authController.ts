@@ -4,67 +4,79 @@ import { Request, Response, NextFunction } from "express";
 /**
  * Middleware to protect routes from unauthorized requests.
  *
+ * @async
+ *
  * @param req
  * @param res
  * @param next
  * @param restrictTo
  */
 async function protect(
-  req: Request,
-  res: Response,
-  next: NextFunction
-  // eslint-disable-next-line capitalized-comments
-  // restrictTo: string
+    req: Request,
+    res: Response,
+    next: NextFunction
+    // eslint-disable-next-line capitalized-comments
+    // restrictTo: string
 ): Promise<void> {
-  try {
-    /*
-     *
-     * Route protection （￣︶￣）↗
-     *
-     */
-  } catch (err) {
-    next(err);
-  }
+    try {
+        /*
+         *
+         * Route protection （￣︶￣）↗
+         *
+         */
+    } catch (err) {
+        next(err);
+    }
 }
 
 /**
  * Middleware to log users in.
+ *
+ * @async
  *
  * @param req
  * @param res
  * @param next
  */
 async function login(
-  req: Request,
-  res: Response,
-  next: NextFunction
+    req: Request,
+    res: Response,
+    next: NextFunction
 ): Promise<void> {
-  try {
-    /**
-     *
-     * Do authentication stuff
-     *
-     */
-  } catch (err) {
-    next(err);
-  }
+    try {
+        /**
+         *
+         * Do authentication stuff
+         *
+         */
+    } catch (err) {
+        next(err);
+    }
 }
 
-// Middleware to sign users up and log them in.
+/**
+ * Middleware to sign up new users and log them in.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function signup(
-  req: Request,
-  res: Response,
-  next: NextFunction
+    req: Request,
+    res: Response,
+    next: NextFunction
 ): Promise<void> {
-  try {
-    /**
-     *
-     * Do more authentication stuff
-     *
-     */
-  } catch (err) {
-    next(err);
-  }
+    try {
+        /**
+         *
+         * Do more authentication stuff
+         *
+         */
+    } catch (err) {
+        next(err);
+    }
 }
 
 export { protect, login, signup };

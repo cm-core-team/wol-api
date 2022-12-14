@@ -10,7 +10,7 @@ import {
 
 const router: Router = Router();
 
-// Mounting middleware on the route
+// Route handling.
 router.route("/getVersesAmount/:book/:chapter").get(getVersesAmount);
 
 router.route("/getVerse/:book/:chapter/:verse").get(getVerse);

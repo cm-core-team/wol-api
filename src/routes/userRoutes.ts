@@ -6,6 +6,7 @@ import { getAllUsers, createUser } from "../controllers/userController.js";
 
 const router: Router = Router();
 
+// Route handling.
 router.route("/").get(getAllUsers).post(createUser);
 
 export default router;

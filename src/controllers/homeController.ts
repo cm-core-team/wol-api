@@ -1,6 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 
-// Handler for the root route.
+/**
+ * Handler for the root route
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 async function homeController(
     req: Request,
     res: Response,
