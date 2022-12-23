@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/userModel.js";
+import User from "../models/userModel";
 
 /**
  * Interface for the request body of new users.

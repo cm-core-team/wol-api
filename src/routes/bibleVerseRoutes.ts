@@ -6,7 +6,7 @@ import { Router } from "express";
 import {
     getVerse,
     getVersesAmount,
-} from "./../controllers/bibleVerseController.js";
+} from "./../controllers/bibleVerseController";
 
 const router: Router = Router();
 

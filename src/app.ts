@@ -7,10 +7,9 @@ import express, { Express, Request, Response, NextFunction } from "express";
 
 // Importing the routes.
 // Remember to add .js extension.
-import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
-import userRouter from "./routes/userRoutes.js";
-import { homeController } from "./controllers/homeController.js";
-// import { protect } from "./controllers/authController.js";
+import bibleVerseRouter from "./routes/bibleVerseRoutes";
+import userRouter from "./routes/userRoutes";
+import { homeController } from "./controllers/homeController";
 
 // Express app.
 const app: Express = express();

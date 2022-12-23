@@ -1,11 +1,11 @@
-import expect from "expect";
+import { jest, expect } from "@jest/globals";
 
 import app from "../src/app";
 import request from "supertest";
 
 import { getVerseText } from "../src/controllers/bibleVerseController";
 
-jest.setTimeout(6000);
+jest.useFakeTimers();
 
 test("Test that the verse is correct. 📖", async (): Promise<void> => {
     // Ids for the html element.
