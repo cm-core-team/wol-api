@@ -9,8 +9,9 @@ import { HTMLElement, parse } from "node-html-parser";
  *
  * @async
  *
- * @param url This is the url for the required verse.
- * @param id The HTML id attribute value for the verse.
+ * @param url - This is the url for the required verse.
+ * @param id - The HTML id attribute value for the verse.
+ * @returns - The verse text as a string.
  */
 const getVerseText = async (url: string, id: string): Promise<string> => {
     // Parsing the html

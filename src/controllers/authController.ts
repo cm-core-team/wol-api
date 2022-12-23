@@ -16,7 +16,7 @@ async function protect(
     res: Response,
     next: NextFunction
     // eslint-disable-next-line capitalized-comments
-    // restrictTo: string
+    // restrictTo: string[]
 ): Promise<void> {
     try {
         /*

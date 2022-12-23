@@ -10,6 +10,7 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import { homeController } from "./controllers/homeController.js";
+// import { protect } from "./controllers/authController.js";
 
 // Express app.
 const app: Express = express();

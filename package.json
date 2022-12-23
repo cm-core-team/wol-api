@@ -1,45 +1,45 @@
 {
-  "name": "wol-api",
-  "version": "0.1.1",
-  "dependencies": {
-    "@types/bent": "^7.3.2",
-    "@types/express": "^4.17.15",
-    "@types/morgan": "^1.9.3",
-    "@types/node": "^18.11.17",
-    "axios": "^1.2.1",
-    "dotenv": "^16.0.3",
-    "email-validator": "^2.0.4",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.1",
-    "morgan": "^1.10.0",
-    "node-html-parser": "^6.1.4",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@types/jest": "^29.2.4",
-    "@types/prompts": "^2.4.2",
-    "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^5.47.0",
-    "@typescript-eslint/parser": "^5.47.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^8.30.0",
-    "jest": "^29.3.1",
-    "jest-ts-webcompat-resolver": "^1.0.0",
-    "nodemon": "^2.0.20",
-    "superagent": "^8.0.6",
-    "supertest": "^6.3.3",
-    "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.1"
-  },
-  "scripts": {
-    "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-    "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/server.ts",
-    "start:prod": "ts-node-esm ./src/server.ts",
-    "test": "jest --silent",
-    "lint": "eslint . --ext .ts"
-  },
-  "type": "module"
+    "name": "wol-api",
+    "version": "0.1.1",
+    "dependencies": {
+        "@types/bent": "^7.3.2",
+        "@types/express": "^4.17.15",
+        "@types/morgan": "^1.9.3",
+        "@types/node": "^18.11.17",
+        "axios": "^1.2.1",
+        "dotenv": "^16.0.3",
+        "email-validator": "^2.0.4",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.8.1",
+        "morgan": "^1.10.0",
+        "node-html-parser": "^6.1.4",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.19.3",
+        "@types/jest": "^29.2.4",
+        "@types/prompts": "^2.4.2",
+        "@types/supertest": "^2.0.12",
+        "@typescript-eslint/eslint-plugin": "^5.47.0",
+        "@typescript-eslint/parser": "^5.47.0",
+        "babel-preset-env": "^1.7.0",
+        "eslint": "^8.30.0",
+        "jest": "^29.3.1",
+        "jest-ts-webcompat-resolver": "^1.0.0",
+        "nodemon": "^2.0.20",
+        "superagent": "^8.0.6",
+        "supertest": "^6.3.3",
+        "ts-jest": "^29.0.3",
+        "ts-node": "^10.9.1"
+    },
+    "scripts": {
+        "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
+        "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/server.ts",
+        "start:prod": "ts-node-esm ./src/server.ts",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "lint": "eslint . --ext .ts"
+    },
+    "type": "module"
 }
