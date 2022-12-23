@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./src/.env" });
 
 // Importing the express app to create the server.
-import app from "./app.js";
+import app from "./app";
 
 // DB
 import * as mongoose from "mongoose";
