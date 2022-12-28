@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
+import User, { IUser } from "./../models/userModel";
+
 // Protect middleware to protect routes from unauthorized requests from the wrong type of user.
 /**
  * Middleware to protect routes from unauthorized requests.
@@ -32,6 +34,8 @@ async function protect(
 /**
  * Middleware to log users in.
  *
+ * Parses the request body and checks the credentials to see if they match up in the DB.
+ *
  * @async
  *
  * @param req
@@ -44,11 +48,19 @@ async function login(
     next: NextFunction
 ): Promise<void> {
     try {
-        /**
-         *
-         * Do authentication stuff
-         *
-         */
+        const { email, password }: IUser = req.body;
+
+        // Check if there is an email or password
+        if (!email || !password)
+            throw new Error("An email or password is required.");
+
+        // Find user in the db
+        const user = await User.findOne({ email }).select("+password");
+
+        // Check if user exists in db
+        if (!user) throw new Error("The email or password is incorrect");
+
+        // Send JWT if everything is correct
     } catch (err) {
         next(err);
     }
@@ -69,11 +81,14 @@ async function signup(
     next: NextFunction
 ): Promise<void> {
     try {
-        /**
-         *
-         * Do more authentication stuff
-         *
-         */
+        const newUser: IUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+        });
+
+        // Send a jwt
     } catch (err) {
         next(err);
     }

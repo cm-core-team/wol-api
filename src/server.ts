@@ -19,14 +19,15 @@ process.on("uncaughtException", (err: Error) => {
 // The port the server will run on
 const PORT: string | undefined = process.env.PORT;
 
+// As of mongoose 7 this is going to be set to "false" by default
+mongoose.set("strictQuery", true);
+
 // Connect to mongo db
 mongoose
     .connect(
         `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.vmbese9.mongodb.net/?retryWrites=true&w=majority`
     )
     .then((): void => console.log("Database has been connected."));
-
-mongoose.set("strictQuery", true);
 
 // Starting the server
 const server = app.listen(PORT, (): void => {

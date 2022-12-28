@@ -1,6 +1,6 @@
 // Development tools.
 import * as dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "./src/.env" });
 import morgan from "morgan";
 
 import express, { Express, Request, Response, NextFunction } from "express";

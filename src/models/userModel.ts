@@ -1,14 +1,22 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 // Validation tools.
 import * as EmailValidator from "email-validator";
+
+export interface IUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    apiToken?: string;
+}
 
 /**
  * Schema (blueprint) for new users to be created.
  *
  * @class User
  */
-const userSchema: Schema = new Schema({
+const userSchema: Schema<IUser> = new Schema({
     firstName: {
         type: String,
         required: [true, "A first name is required for a user to be created."],
@@ -22,6 +30,7 @@ const userSchema: Schema = new Schema({
     email: {
         type: String,
         required: [true, "An email is required for a user to be created."],
+        unique: true,
         validate: {
             validator: function (email: string) {
                 return EmailValidator.validate(email);
@@ -36,9 +45,10 @@ const userSchema: Schema = new Schema({
     },
     apiToken: {
         type: String,
+        unique: true,
     },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = model<IUser>("User", userSchema);
 
 export default User;

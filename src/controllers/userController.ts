@@ -1,17 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/userModel";
-
-/**
- * Interface for the request body of new users.
- *
- * @interface
- */
-interface UserBody {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
+import User, { IUser } from "../models/userModel";
 
 /**
  * Returns all the users from the database.
@@ -56,10 +44,10 @@ async function createUser(
 ): Promise<void> {
     try {
         // Parsing the request body
-        const { firstName, lastName, email, password }: UserBody = req.body;
+        const { firstName, lastName, email, password }: IUser = req.body;
 
         // Creating new user.
-        const user = await User.create({
+        const user = new User({
             firstName,
             lastName,
             email,
