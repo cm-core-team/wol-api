@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import parse, { HTMLElement } from "node-html-parser";
+import { parse, HTMLElement } from "node-html-parser";
 
 /**
  * Helper function to get the verse text from WOL.

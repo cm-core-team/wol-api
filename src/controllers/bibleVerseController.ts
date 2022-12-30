@@ -1,11 +1,11 @@
 // Welcome to the controller for bibleVerses
 
 import { Request, Response, NextFunction } from "express";
-import axios, { AxiosResponse } from "axios";
-import { HTMLElement, parse } from "node-html-parser";
+import { HTMLElement } from "node-html-parser";
 
 import getHTML from "../utils/getHTML";
 import catchAsync from "../utils/catchAsync";
+import console from "console";
 
 /**
  * Handler for getting a single verse
@@ -36,9 +36,8 @@ const getVerse = catchAsync(
                 error: "Invalid entry, please check your request and retry.",
             });
             next(new Error("Result is undefined!"));
-
-            res.status(200).json({ data: verse });
         }
+        res.status(200).json({ data: verse });
     }
 );
 
@@ -68,4 +67,4 @@ const getVersesAmount = catchAsync(
 );
 
 // Exporting all the handler functions
-export { getVerse, getVersesAmount, getVerseText };
+export { getVerse, getVersesAmount };
