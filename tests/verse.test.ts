@@ -3,10 +3,12 @@ import { jest, expect } from "@jest/globals";
 import app from "../src/app";
 import request from "supertest";
 
-import { getVerseText } from "../src/controllers/bibleVerseController";
+import getHTML from "../src/utils/getHTML";
 
 jest.useFakeTimers();
 
+// THIS TEST IS OFF LIMITS FOR NOW
+// NEED TO FIX AN ISSUE AS I HAVE REFACTORED SOME CODE
 test("Test that the verse is correct. 📖", async (): Promise<void> => {
     // Ids for the html element.
     const ids: string[] = [
@@ -18,25 +20,20 @@ test("Test that the verse is correct. 📖", async (): Promise<void> => {
     ];
 
     // Getting the verse text.
-    const verseTest1: string = await getVerseText(
-        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/1/1#study=discover&v=1:1:1",
-        ids[0]
+    const verseTest1: HTMLElement = await getHTML(
+        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/1/1#study=discover&v=1:1:1"
     );
-    const verseTest2: string = await getVerseText(
-        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/59/4#study=discover&v=59:4:8",
-        ids[1]
+    const verseTest2: HTMLElement = await getHTML(
+        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/59/4#study=discover&v=59:4:8"
     );
-    const verseTest3: string = await getVerseText(
-        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/66/21#study=discover&v=66:21:4",
-        ids[2]
+    const verseTest3: HTMLElement = await getHTML(
+        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/66/21#study=discover&v=66:21:4"
     );
-    const verseTest4: string = await getVerseText(
-        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/19/37#study=discover&v=19:37:11",
-        ids[3]
+    const verseTest4: HTMLElement = await getHTML(
+        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/19/37#study=discover&v=19:37:11"
     );
-    const verseTest5: string = await getVerseText(
-        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/40/24#study=discover&v=40:24:7",
-        ids[4]
+    const verseTest5: HTMLElement = await getHTML(
+        "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/40/24#study=discover&v=40:24:7"
     );
 
     // Responses directly from the api.

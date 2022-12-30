@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User, { IUser } from "../models/userModel";
+import catchAsync from "../utils/catchAsync";
 
 /**
  * Returns all the users from the database.
@@ -10,23 +11,16 @@ import User, { IUser } from "../models/userModel";
  * @param res
  * @param next
  */
-async function getAllUsers(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
-        // TODO:
+const getAllUsers = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const users = await User.find();
 
         res.status(200).json({
             results: users.length,
             data: users,
         });
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 /**
  * Creates a new user and stores it on the DB.
@@ -37,12 +31,8 @@ async function getAllUsers(
  * @param res
  * @param next
  */
-async function createUser(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
+const createUser = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         // Parsing the request body
         const { firstName, lastName, email, password }: IUser = req.body;
 
@@ -58,9 +48,7 @@ async function createUser(
         res.status(200).json({
             data: user,
         });
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 export { getAllUsers, createUser };

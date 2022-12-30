@@ -4,26 +4,8 @@ import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
 import { HTMLElement, parse } from "node-html-parser";
 
-/**
- * Helper function to get the verse text from WOL.
- *
- * @async
- *
- * @param url - This is the url for the required verse.
- * @param id - The HTML id attribute value for the verse.
- * @returns - The verse text as a string.
- */
-const getVerseText = async (url: string, id: string): Promise<string> => {
-    // Parsing the html
-    const html: AxiosResponse<any, any> = await axios.get(url);
-    const data: HTMLElement = parse(html.data);
-
-    // Getting the actual verse text
-    return data
-        .getElementById(id)
-        .text.replace(/[0-9+*]/g, "")
-        .trim();
-};
+import getHTML from "../utils/getHTML";
+import catchAsync from "../utils/catchAsync";
 
 /**
  * Handler for getting a single verse
@@ -34,34 +16,31 @@ const getVerseText = async (url: string, id: string): Promise<string> => {
  * @param res
  * @param next
  */
-async function getVerse(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
+const getVerse = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         // Id for the html element
         const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
         // Getting the verse text
-        const verse: string = await getVerseText(
-            `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`,
-            idString
+        const html: HTMLElement = await getHTML(
+            `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
         );
+
+        const verse: string = html
+            .getElementById(idString)
+            .text.replace(/[0-9+*]/g, "")
+            .trim();
 
         if (!verse) {
             res.status(400).json({
                 error: "Invalid entry, please check your request and retry.",
             });
-            next(Error("Result is undefined!"));
-        }
+            next(new Error("Result is undefined!"));
 
-        res.status(200).json({ data: verse });
-    } catch (err: unknown) {
-        // Res.status(500).json({ error: "Error on the server-side. " + err.message });
-        next(err);
+            res.status(200).json({ data: verse });
+        }
     }
-}
+);
 
 /**
  * Handler for getting the amount of verses of a certain chapter.
@@ -72,23 +51,21 @@ async function getVerse(
  * @param res
  * @param next
  */
-async function getVersesAmount(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
-        const htmlData: AxiosResponse<any, any> = await axios.get(
+const getVersesAmount = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const html: HTMLElement = await getHTML(
             `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
         );
-        const data: HTMLElement = parse(htmlData.data);
-        const amount: number = data.querySelectorAll(".v").length;
+
+        if (!html)
+            next(
+                new Error("There seems to be an issue. Please try again later")
+            );
+        const amount: number = html.querySelectorAll(".v").length;
 
         res.status(200).json({ data: amount });
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 // Exporting all the handler functions
 export { getVerse, getVersesAmount, getVerseText };

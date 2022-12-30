@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
 import User, { IUser } from "./../models/userModel";
+import catchAsync from "../utils/catchAsync";
 
-// Protect middleware to protect routes from unauthorized requests from the wrong type of user.
 /**
  * Middleware to protect routes from unauthorized requests.
  *
@@ -13,23 +13,21 @@ import User, { IUser } from "./../models/userModel";
  * @param next
  * @param restrictTo
  */
-async function protect(
-    req: Request,
-    res: Response,
-    next: NextFunction
-    // eslint-disable-next-line capitalized-comments
-    // restrictTo: string[]
-): Promise<void> {
-    try {
+const protect = catchAsync(
+    async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+        // eslint-disable-next-line capitalized-comments
+        // restrictTo: string[]
+    ): Promise<void> => {
         /*
          *
          * Route protection （￣︶￣）↗
          *
          */
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 /**
  * Middleware to log users in.
@@ -42,29 +40,23 @@ async function protect(
  * @param res
  * @param next
  */
-async function login(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
+const login = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const { email, password }: IUser = req.body;
 
         // Check if there is an email or password
         if (!email || !password)
-            throw new Error("An email or password is required.");
+            next(new Error("An email or password is required."));
 
         // Find user in the db
         const user = await User.findOne({ email }).select("+password");
 
         // Check if user exists in db
-        if (!user) throw new Error("The email or password is incorrect");
+        if (!user) next(new Error("The email or password is incorrect"));
 
         // Send JWT if everything is correct
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 /**
  * Middleware to sign up new users and log them in.
@@ -75,12 +67,9 @@ async function login(
  * @param res
  * @param next
  */
-async function signup(
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void> {
-    try {
+
+const signup = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const newUser: IUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -89,9 +78,7 @@ async function signup(
         });
 
         // Send a jwt
-    } catch (err) {
-        next(err);
     }
-}
+);
 
 export { protect, login, signup };
