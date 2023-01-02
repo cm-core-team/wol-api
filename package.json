@@ -4,7 +4,7 @@
     "dependencies": {
         "@types/bent": "^7.3.2",
         "@types/express": "^4.17.15",
-        "@types/morgan": "^1.9.3",
+        "@types/morgan": "^1.9.4",
         "@types/node": "^18.11.18",
         "axios": "^1.2.2",
         "dotenv": "^16.0.3",
