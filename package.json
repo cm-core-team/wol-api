@@ -2,7 +2,7 @@
     "name": "wol-api",
     "version": "0.1.1",
     "dependencies": {
-        "@types/bent": "^7.3.2",
+        "@types/bent": "^7.3.3",
         "@types/express": "^4.17.15",
         "@types/morgan": "^1.9.3",
         "@types/node": "^18.11.18",
