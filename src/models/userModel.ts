@@ -1,9 +1,12 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, HydratedDocument } from "mongoose";
+import { NextFunction } from "express";
 
 // Validation tools.
 import * as EmailValidator from "email-validator";
+import bcrypt from "bcrypt";
 
 export interface IUser {
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -41,6 +44,10 @@ const userSchema: Schema<IUser> = new Schema({
     password: {
         type: String,
         required: [true, "A password is required for a user to be created."],
+        minlength: [
+            8,
+            "Your password has to have a minimum length of 8 characters.",
+        ],
         // Needs to be encrypted
     },
     apiToken: {
@@ -49,6 +56,18 @@ const userSchema: Schema<IUser> = new Schema({
     },
 });
 
+userSchema.pre("save", async function (next): Promise<void> {
+    this.password = await bcrypt.hash(this.password, 12);
+
+    next();
+});
+
+userSchema.methods.correctPassword = async function correctPassword(
+    candidatePassword: string,
+    userPassword: string
+): Promise<boolean> {
+    return await bcrypt.compare(candidatePassword, userPassword);
+};
 const User = model<IUser>("User", userSchema);
 
 export default User;

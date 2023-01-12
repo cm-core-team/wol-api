@@ -1,7 +1,29 @@
 import { Request, Response, NextFunction } from "express";
+import jwt, { Secret } from "jsonwebtoken";
 
 import User, { IUser } from "./../models/userModel";
 import catchAsync from "../utils/catchAsync";
+import process from "process";
+
+const signToken = (userId: string): string => {
+    return jwt.sign({ userId }, process.env.JWT_SECRET as Secret, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+};
+
+const createSendToken = (user: IUser, statusCode: number, res: Response) => {
+    const token: string = signToken(user._id);
+    const cookieOptions: object = {
+        expires: new Date(
+            ((Date.now() +
+                process.env.JWT_COOKIE_EXPIRES_IN) as unknown as number) *
+                24 *
+                60 *
+                60 *
+                1000
+        ),
+    };
+};
 
 /**
  * Middleware to protect routes from unauthorized requests.

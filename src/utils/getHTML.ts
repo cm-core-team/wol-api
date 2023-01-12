@@ -6,15 +6,15 @@ import { parse, HTMLElement } from "node-html-parser";
  *
  * @async
  *
- * @param url - This is the url for the required verse.
- * @returns - The verse text as a string.
+ * @param url - The URL for the required HTML
+ * @returns - HTML data
  */
 const getHTML = async (url: string): Promise<HTMLElement> => {
     // Parsing the html
-    const html: AxiosResponse<any, any> = await axios.get(url);
-    const data: HTMLElement = parse(html.data);
+    const response: AxiosResponse<any, any> = await axios.get(url);
+    const html: HTMLElement = parse(response.data);
 
-    return data;
+    return html;
 };
 
 export default getHTML;

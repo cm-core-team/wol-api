@@ -5,7 +5,6 @@ import { HTMLElement } from "node-html-parser";
 
 import getHTML from "../utils/getHTML";
 import catchAsync from "../utils/catchAsync";
-import console from "console";
 
 /**
  * Handler for getting a single verse
@@ -18,7 +17,7 @@ import console from "console";
  */
 const getVerse = catchAsync(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        // Id for the html element
+        // Id for the html element containing the verse
         const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
         // Getting the verse text
@@ -60,7 +59,7 @@ const getVersesAmount = catchAsync(
             next(
                 new Error("There seems to be an issue. Please try again later")
             );
-        const amount: number = html.querySelectorAll(".v").length;
+        const amount = html.querySelectorAll(".v").length;
 
         res.status(200).json({ data: amount });
     }
