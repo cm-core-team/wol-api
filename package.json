@@ -5,7 +5,7 @@
         "@types/bcrypt": "^5.0.0",
         "@types/bent": "^7.3.3",
         "@types/express": "^4.17.15",
-        "@types/jsonwebtoken": "^9.0.0",
+        "@types/jsonwebtoken": "^9.0.1",
         "@types/morgan": "^1.9.4",
         "@types/node": "^18.11.18",
         "axios": "^1.2.2",
@@ -34,7 +34,7 @@
         "nodemon": "^2.0.20",
         "superagent": "^8.0.6",
         "supertest": "^6.3.3",
-        "ts-jest": "^29.0.4",
+        "ts-jest": "^29.0.5",
         "ts-node": "^10.9.1"
     },
     "scripts": {
