@@ -1,28 +1,39 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, CookieOptions } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 
 import User, { IUser } from "./../models/userModel";
 import catchAsync from "../utils/catchAsync";
 import process from "process";
 
+const jwtSecret: Secret = process.env.JWT_SECRET as Secret;
+const jwtValidFor: string = process.env.JWT_EXPIRES_IN as string;
+const jwtCookieValidFor: number = process.env
+    .JWT_COOKIE_EXPIRES_IN as unknown as number;
+
 const signToken = (userId: string): string => {
-    return jwt.sign({ userId }, process.env.JWT_SECRET as Secret, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
+    return jwt.sign({ userId }, jwtSecret, {
+        expiresIn: jwtValidFor,
     });
 };
 
 const createSendToken = (user: IUser, statusCode: number, res: Response) => {
     const token: string = signToken(user._id);
-    const cookieOptions: object = {
+    const cookieOptions: CookieOptions = {
         expires: new Date(
-            ((Date.now() +
-                process.env.JWT_COOKIE_EXPIRES_IN) as unknown as number) *
-                24 *
-                60 *
-                60 *
-                1000
+            (Date.now() + jwtCookieValidFor) * 24 * 60 * 60 * 1000
         ),
+        httpOnly: true,
     };
+
+    if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+    res.cookie("jwt", token, cookieOptions);
+
+    // Unable to literally set it to undefined.
+    user.password = "undefined";
+
+    // The token should not be sent in production...
+    // ** DEVELOPMENT PURPOSES ONLY **
+    res.status(statusCode).json({ status: "success", token, data: { user } });
 };
 
 /**
