@@ -54,11 +54,17 @@ const protect = catchAsync(
         // eslint-disable-next-line capitalized-comments
         // restrictTo: string[]
     ): Promise<void> => {
-        /*
-         *
-         * Route protection （￣︶￣）↗
-         *
-         */
+        const candidateToken: string = req.cookies.jwt;
+
+        if (!candidateToken) {
+            return next(
+                new Error("You are not logged in, please log in to get access")
+            );
+        }
+
+        jwt.verify(candidateToken, jwtSecret, (err, decoded) => {
+            console.log(`JWT has been decoded :) ${decoded}`);
+        });
     }
 );
 
