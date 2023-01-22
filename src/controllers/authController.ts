@@ -62,8 +62,19 @@ const protect = catchAsync(
             );
         }
 
-        jwt.verify(candidateToken, jwtSecret, (err, decoded) => {
-            console.log(`JWT has been decoded :) ${decoded}`);
+        jwt.verify(candidateToken, jwtSecret, async (err, decodedToken) => {
+            if (err)
+                return next(
+                    new Error(
+                        "The token you have provided seems to be incorrect."
+                    )
+                );
+
+            const possibleUserID = decodedToken.userId;
+            const possibleUser: IUser = await User.findById(possibleUserID);
+
+            if (!possibleUser)
+                return next(new Error("This user doesn't exist."));
         });
     }
 );
