@@ -2,9 +2,9 @@
 import { Router } from "express";
 
 // Handlers
-import { getAllUsers, createUser } from "../controllers/userController";
+import { getAllUsers, createUser } from "../controllers/userController.js";
 
-import { signup } from "../controllers/authController";
+import { signup } from "../controllers/authController.js";
 
 const router: Router = Router();
 

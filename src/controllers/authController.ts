@@ -1,39 +1,37 @@
 import { Request, Response, NextFunction, CookieOptions } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 
-import User, { IUser } from "./../models/userModel";
-import catchAsync from "../utils/catchAsync";
+import User, { IUser } from "./../models/userModel.js";
+import catchAsync from "../utils/catchAsync.js";
 import process from "process";
 
 const jwtSecret: Secret = process.env.JWT_SECRET as Secret;
 const jwtValidFor: string = process.env.JWT_EXPIRES_IN as string;
 const jwtCookieValidFor: number = process.env
-    .JWT_COOKIE_EXPIRES_IN as unknown as number;
+  .JWT_COOKIE_EXPIRES_IN as unknown as number;
 
 const signToken = (userId: string): string => {
-    return jwt.sign({ userId }, jwtSecret, {
-        expiresIn: jwtValidFor,
-    });
+  return jwt.sign({ userId }, jwtSecret, {
+    expiresIn: jwtValidFor,
+  });
 };
 
 const createSendToken = (user: IUser, statusCode: number, res: Response) => {
-    const token: string = signToken(user._id);
-    const cookieOptions: CookieOptions = {
-        expires: new Date(
-            (Date.now() + jwtCookieValidFor) * 24 * 60 * 60 * 1000
-        ),
-        httpOnly: true,
-    };
+  const token: string = signToken(user._id);
+  const cookieOptions: CookieOptions = {
+    expires: new Date((Date.now() + jwtCookieValidFor) * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+  };
 
-    if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
-    res.cookie("jwt", token, cookieOptions);
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  res.cookie("jwt", token, cookieOptions);
 
-    // Unable to literally set it to undefined.
-    user.password = "undefined";
+  // Unable to literally set it to undefined.
+  user.password = "undefined";
 
-    // The token should not be sent in production...
-    // ** DEVELOPMENT PURPOSES ONLY **
-    res.status(statusCode).json({ status: "success", token, data: { user } });
+  // The token should not be sent in production...
+  // ** DEVELOPMENT PURPOSES ONLY **
+  res.status(statusCode).json({ status: "success", token, data: { user } });
 };
 
 /**
@@ -47,39 +45,37 @@ const createSendToken = (user: IUser, statusCode: number, res: Response) => {
  * @param restrictTo
  */
 const protect = catchAsync(
-    async (
-        req: Request,
-        res: Response,
-        next: NextFunction
-        // eslint-disable-next-line capitalized-comments
-        // restrictTo: string[]
-    ): Promise<void> => {
-        const candidateToken: string = req.cookies.jwt;
+  async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+    // eslint-disable-next-line capitalized-comments
+    // restrictTo: string[]
+  ): Promise<void> => {
+    const candidateToken: string = req.cookies.jwt;
 
-        if (!candidateToken) {
-            return next(
-                new Error("You are not logged in, please log in to get access")
-            );
-        }
+    if (!candidateToken) {
+      return next(
+        new Error("You are not logged in, please log in to get access")
+      );
+    }
 
-        jwt.verify(candidateToken, jwtSecret, async (err, decodedToken) => {
-            if (err)
-                return next(
-                    new Error(
-                        "The token you have provided seems to be incorrect."
-                    )
-                );
-            
-            // TODO: Fix these errors:
-            /*
+    jwt.verify(candidateToken, jwtSecret, async (err, decodedToken) => {
+      if (err)
+        return next(
+          new Error("The token you have provided seems to be incorrect.")
+        );
+
+      // TODO: Fix these errors:
+      /*
             const possibleUserID = decodedToken.userId;
             const possibleUser: IUser = await User.findById(possibleUserID);
             
             if (!possibleUser)
                 return next(new Error("This user doesn't exist."));
             */
-        });
-    }
+    });
+  }
 );
 
 /**
@@ -94,21 +90,21 @@ const protect = catchAsync(
  * @param next
  */
 const login = catchAsync(
-    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        const { email, password }: IUser = req.body;
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { email, password }: IUser = req.body;
 
-        // Check if there is an email or password
-        if (!email || !password)
-            next(new Error("An email or password is required."));
+    // Check if there is an email or password
+    if (!email || !password)
+      next(new Error("An email or password is required."));
 
-        // Find user in the db
-        const user = await User.findOne({ email }).select("+password");
+    // Find user in the db
+    const user = await User.findOne({ email }).select("+password");
 
-        // Check if user exists in db
-        if (!user) next(new Error("The email or password is incorrect"));
+    // Check if user exists in db
+    if (!user) next(new Error("The email or password is incorrect"));
 
-        // Send JWT if everything is correct
-    }
+    // Send JWT if everything is correct
+  }
 );
 
 /**
@@ -122,16 +118,16 @@ const login = catchAsync(
  */
 
 const signup = catchAsync(
-    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        const newUser: IUser = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-        });
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const newUser: IUser = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+    });
 
-        // Send a jwt
-    }
+    // Send a jwt
+  }
 );
 
 export { protect, login, signup };
