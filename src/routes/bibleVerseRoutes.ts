@@ -6,13 +6,15 @@ import { Router } from "express";
 import {
     getVerse,
     getVersesAmount,
+    getNumberOfChapters
 } from "./../controllers/bibleVerseController";
 
 const router: Router = Router();
 
 // Route handling.
-router.route("/getVersesAmount/:book/:chapter").get(getVersesAmount);
 
 router.route("/getVerse/:book/:chapter/:verse").get(getVerse);
+router.route("/getVersesAmount/:book/:chapter").get(getVersesAmount);
+router.route("/getNumberOfChapters/:book/").get(getNumberOfChapters);
 
 export default router;

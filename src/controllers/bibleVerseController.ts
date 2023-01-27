@@ -65,5 +65,24 @@ const getVersesAmount = catchAsync(
     }
 );
 
+
+const getNumberOfChapters = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const html: HTMLElement = await getHTML(
+            `https://wol.jw.org/en/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
+        );
+
+        if (!html)
+            next(new Error("Server is not responding"));
+        
+        const amount = html.querySelectorAll('.chapter').length;
+        res.status(200).json({ data: amount });
+    }
+);
+
 // Exporting all the handler functions
-export { getVerse, getVersesAmount };
+export {
+    getVerse,
+    getVersesAmount,
+    getNumberOfChapters
+};
