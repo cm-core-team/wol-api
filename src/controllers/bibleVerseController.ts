@@ -1,63 +1,88 @@
-import console from "console";
-import { Request, Response } from "express";
+// Welcome to the controller for bibleVerses
 
-import axios, { AxiosResponse } from "axios";
-import bent from "bent";
-import { HTMLElement, parse } from "node-html-parser";
+import { Request, Response, NextFunction } from "express";
+import { HTMLElement } from "node-html-parser";
 
-async function getVerse(
-  req: Request,
-  res: Response,
-  next: Function
-): Promise<void> {
-  try {
-    const htmlData: AxiosResponse<any, any> = await axios.get(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
-    );
-    const data: HTMLElement = parse(htmlData.data);
+import getHTML from "../utils/getHTML";
+import catchAsync from "../utils/catchAsync";
 
-    // id for the html element
-    const idString: string = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
+/**
+ * Handler for getting a single verse
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+const getVerse = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        // Id for the html element containing the verse
+        const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
 
-    // getting the verse text
-    const verse: string = data
-      .getElementById(idString)
-      // Remove non-alpha-whitespace characters e.g. <p>hello</p> => phellop
-      .text.replace(/[0-9+*]/g, "")
-      .trim();
+        // Getting the verse text
+        const html: HTMLElement = await getHTML(
+            `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
+        );
 
-    if (!verse) {
-      res.status(400).json({
-        error: "Invalid entry, please check your request and retry.",
-      });
-      next(Error("Result is undefined!"));
-      return;
+        const verse: string = html
+            .getElementById(idString)
+            .text.replace(/[0-9+*]/g, "")
+            .trim();
+
+        if (!verse) {
+            res.status(400).json({
+                error: "Invalid entry, please check your request and retry.",
+            });
+            next(new Error("Result is undefined!"));
+        }
+        res.status(200).json({ data: verse });
     }
+);
 
-    res.status(200).json({ data: verse });
-  } catch (err: any) {
-    res.status(400).json({ error: "Error on the server-side. " + err.message });
-    next(err);
-  }
-}
+/**
+ * Handler for getting the amount of verses of a certain chapter.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+const getVersesAmount = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const html: HTMLElement = await getHTML(
+            `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
+        );
 
-async function getVersesAmount(
-  req: Request,
-  res: Response,
-  next: Function
-): Promise<void> {
-  try {
-    const htmlData: AxiosResponse<any, any> = await axios.get(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
-    );
-    const data: HTMLElement = parse(htmlData.data);
-    const finalVerse = data.querySelectorAll(".v").length;
+        if (!html)
+            next(
+                new Error("There seems to be an issue. Please try again later")
+            );
+        const amount = html.querySelectorAll(".v").length;
 
-    res.status(200).json({ data: finalVerse });
-  } catch (err) {
-    next(err);
-  }
-}
+        res.status(200).json({ data: amount });
+    }
+);
 
-// exporting all the handler functions
-export { getVerse, getVersesAmount };
+
+const getNumberOfChapters = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const html: HTMLElement = await getHTML(
+            `https://wol.jw.org/en/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
+        );
+
+        if (!html)
+            next(new Error("Server is not responding"));
+        
+        const amount = html.querySelectorAll('.chapter').length;
+        res.status(200).json({ data: amount });
+    }
+);
+
+// Exporting all the handler functions
+export {
+    getVerse,
+    getVersesAmount,
+    getNumberOfChapters
+};

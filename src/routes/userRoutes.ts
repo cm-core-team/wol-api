@@ -1,9 +1,14 @@
+// Welcome to the user router
 import { Router } from "express";
 
-import { getAllUsers, createUser } from "../controllers/userController.js";
+// Handlers
+import { getAllUsers, createUser } from "../controllers/userController";
+
+import { signup } from "../controllers/authController";
 
 const router: Router = Router();
 
-router.route("/").get(getAllUsers).post(createUser);
+// Route handling.
+router.route("/").get(getAllUsers).post(signup);
 
 export default router;

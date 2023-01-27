@@ -11,21 +11,32 @@ const routeName = process.argv[2];
 const isAcceptable = /^[a-zA-Z]+$/.test(routeName);
 
 if (!isAcceptable) {
-  console.error(
-    "Invalid route name. Please enter something that doesn't contain numbers or special characters."
-  );
-  process.exit(-1);
+    console.error(
+        "Invalid route name. Please enter something that doesn't contain numbers or special characters."
+    );
+    process.exit(-1);
 }
 
 // Root of the project
 const root = path.resolve("./");
 
 // Path, relative to the root of the project, to the routes folder
-const routesPath = path.join(root, "src/backend/routes", routeName + "Routes.ts");
-const controllerPath = path.join(root, "src/backend/controllers", routeName + "Controller.ts");
+const routesPath = path.join(
+    root,
+    "src/backend/routes",
+    routeName + "Routes.ts"
+);
+const controllerPath = path.join(
+    root,
+    "src/backend/controllers",
+    routeName + "Controller.ts"
+);
 
 // Controller file relative to routes directory
-const relativeControllerFilename = path.join('../controllers', routeName + "Controller.js");
+const relativeControllerFilename = path.join(
+    "../controllers",
+    routeName + "Controller.js"
+);
 
 // Typical template for routes
 const routesTemplate = `
@@ -70,23 +81,31 @@ export default routeHandler;
 `;
 
 // Write to routes
-fs.writeFile(routesPath, routesTemplate, (err) => {
-  if (err) {
-    // Failure
-    console.error(err);
-  } else {
-    // Success
-    console.info("Route created successfully!");
-  }
-});
+fs.writeFile(
+    routesPath,
+    routesTemplate,
+    (err: NodeJS.ErrnoException | null) => {
+        if (err) {
+            // Failure
+            console.error(err);
+        } else {
+            // Success
+            console.info("Route created successfully!");
+        }
+    }
+);
 
 // Write to controller
-fs.writeFile(controllerPath, controllerTemplate, (err) => {
-  if (err) {
-    // Failure
-    console.error(err);
-  } else {
-    // Success
-    console.info("Controller created successfully!");
-  }
-});
+fs.writeFile(
+    controllerPath,
+    controllerTemplate,
+    (err: NodeJS.ErrnoException | null) => {
+        if (err) {
+            // Failure
+            console.error(err);
+        } else {
+            // Success
+            console.info("Controller created successfully!");
+        }
+    }
+);

@@ -1,59 +1,73 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model, HydratedDocument } from "mongoose";
+import { NextFunction } from "express";
 
-// validation tools
+// Validation tools.
 import * as EmailValidator from "email-validator";
+import bcrypt from "bcrypt";
 
-const userSchema: Schema = new Schema({
-  firstName: {
-    type: String,
-    required: [true, "A first name is required for a user to be created."],
-    maxLength: 20,
-  },
-  lastName: {
-    type: String,
-    required: [true, "A last name is required for a user to be created."],
-    maxLength: 20,
-  },
-  email: {
-    type: String,
-    required: [true, "An email is required for a user to be created."],
-    validate: {
-      validator: function (email: string) {
-        return EmailValidator.validate(email);
-      },
-      message: (props: any) => `${props.value} is not a valid email!!!`,
+export interface IUser {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    apiToken?: string;
+}
+
+/**
+ * Schema (blueprint) for new users to be created.
+ *
+ * @class User
+ */
+const userSchema: Schema<IUser> = new Schema({
+    firstName: {
+        type: String,
+        required: [true, "A first name is required for a user to be created."],
+        maxLength: 20,
     },
-    // Needs to be validated
-  },
-  password: {
-    type: String,
-    required: [true, "A password is required for a user to be created."],
-    // Needs to be encrypted
-  },
-  apiToken: {
-    type: String,
-  },
+    lastName: {
+        type: String,
+        required: [true, "A last name is required for a user to be created."],
+        maxLength: 20,
+    },
+    email: {
+        type: String,
+        required: [true, "An email is required for a user to be created."],
+        unique: true,
+        validate: {
+            validator: function (email: string) {
+                return EmailValidator.validate(email);
+            },
+            message: (props: any) => `${props.value} is not a valid email!!!`,
+        },
+    },
+    password: {
+        type: String,
+        required: [true, "A password is required for a user to be created."],
+        minlength: [
+            8,
+            "Your password has to have a minimum length of 8 characters.",
+        ],
+        // Needs to be encrypted
+    },
+    apiToken: {
+        type: String,
+        unique: true,
+    },
 });
 
-const User: mongoose.Model<
-  {
-    [x: string]: any;
-  },
-  {},
-  {},
-  {},
-  Schema<
-    any,
-    mongoose.Model<any, any, any, any, any>,
-    {},
-    {},
-    {},
-    {},
-    "type",
-    {
-      [x: string]: any;
-    }
-  >
-> = mongoose.model("User", userSchema);
+userSchema.pre("save", async function (next): Promise<void> {
+    this.password = await bcrypt.hash(this.password, 12);
+
+    next();
+});
+
+userSchema.methods.correctPassword = async function correctPassword(
+    candidatePassword: string,
+    userPassword: string
+): Promise<boolean> {
+    return await bcrypt.compare(candidatePassword, userPassword);
+};
+const User = model<IUser>("User", userSchema);
 
 export default User;

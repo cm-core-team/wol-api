@@ -1,10 +1,6 @@
-# formatter/linter
-.eslintrc.json
+# formatter
 .prettierrc
 
 # node
 node_modules
-
-
-build
 .env

@@ -1,64 +1,54 @@
-// mongoose types
-import { Document } from "mongoose";
+import { NextFunction, Request, Response } from "express";
+import User, { IUser } from "../models/userModel";
+import catchAsync from "../utils/catchAsync";
 
-import { Request, Response } from "express";
+/**
+ * Returns all the users from the database.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+const getAllUsers = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const users = await User.find();
 
-import User from "../models/userModel.js";
+        res.status(200).json({
+            results: users.length,
+            data: users,
+        });
+    }
+);
 
-interface UserBody {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+/**
+ * Creates a new user and stores it on the DB.
+ *
+ * @async
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+const createUser = catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        // Parsing the request body
+        const { firstName, lastName, email, password }: IUser = req.body;
 
-async function getAllUsers(
-  req: Request,
-  res: Response,
-  next: Function
-): Promise<void> {
-  try {
-    const users: (Document<
-      unknown,
-      any,
-      {
-        [x: string]: any;
-      }
-    > & {
-      [x: string]: any;
-    } & Required<{
-        _id: unknown;
-      }>)[] = await User.find();
+        // Creating new user.
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+        });
 
-    res.status(200).json({
-      results: users.length,
-      data: users,
-    });
-  } catch (err) {
-    next(err);
-  }
-}
-
-async function createUser(
-  req: Request,
-  res: Response,
-  next: Function
-): Promise<void> {
-  try {
-    const { firstName, lastName, email, password }: UserBody = req.body;
-    const user: any = await User.create({
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-
-    res.status(200).json({
-      data: user,
-    });
-  } catch (err) {
-    next(err);
-  }
-}
+        // Sending response back to client
+        res.status(200).json({
+            data: user,
+        });
+    }
+);
 
 export { getAllUsers, createUser };
