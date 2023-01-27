@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import User, { IUser } from "../models/userModel";
-import catchAsync from "../utils/catchAsync";
+import User, { IUser } from "../models/userModel.js";
+import catchAsync from "../utils/catchAsync.js";
 
 /**
  * Returns all the users from the database.
