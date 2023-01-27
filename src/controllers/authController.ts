@@ -69,12 +69,15 @@ const protect = catchAsync(
                         "The token you have provided seems to be incorrect."
                     )
                 );
-
+            
+            // TODO: Fix these errors:
+            /*
             const possibleUserID = decodedToken.userId;
             const possibleUser: IUser = await User.findById(possibleUserID);
-
+            
             if (!possibleUser)
                 return next(new Error("This user doesn't exist."));
+            */
         });
     }
 );
