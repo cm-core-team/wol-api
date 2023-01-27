@@ -12,7 +12,7 @@
     "arrow-parens": "warn",
     "block-scoped-var": "warn",
 
-    "indent": "error",
+    "indent": ["error", 2],
     "arrow-spacing": "error",
     "no-mixed-spaces-and-tabs": "error",
     "no-trailing-spaces": "error",

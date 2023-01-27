@@ -10,11 +10,11 @@ import { parse, HTMLElement } from "node-html-parser";
  * @returns - HTML data
  */
 const getHTML = async (url: string): Promise<HTMLElement> => {
-    // Parsing the html
-    const response: AxiosResponse<any, any> = await axios.get(url);
-    const html: HTMLElement = parse(response.data);
+  // Parsing the html
+  const response: AxiosResponse<any, any> = await axios.get(url);
+  const html: HTMLElement = parse(response.data);
 
-    return html;
+  return html;
 };
 
 export default getHTML;
