@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction, CookieOptions } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 
-import User, { IUser } from "./../models/userModel";
-import catchAsync from "../utils/catchAsync";
+import User, { IUser } from "./../models/userModel.js";
+import catchAsync from "../utils/catchAsync.js";
 import process from "process";
 
 const jwtSecret: Secret = process.env.JWT_SECRET as Secret;
@@ -69,7 +69,7 @@ const protect = catchAsync(
                         "The token you have provided seems to be incorrect."
                     )
                 );
-            
+
             // TODO: Fix these errors:
             /*
             const possibleUserID = decodedToken.userId;
