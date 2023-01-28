@@ -6,6 +6,7 @@ import { HTMLElement } from "node-html-parser";
 import getHTML from "../utils/getHTML.js";
 import catchAsync from "../utils/catchAsync.js";
 import parseVerseFromHTML from "../utils/parseVerseFromHTML.js";
+import console from "console";
 
 /**
  * Handler for getting a single verse
@@ -83,5 +84,28 @@ const getNumberOfChapters = catchAsync(
   }
 );
 
+const getVersesInChapter = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { book, chapter } = req.params;
+    const html: HTMLElement = await getHTML(
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${book}/${chapter}#study=discover`
+    );
+
+    if (!html) {
+      next(new Error("Invalid request, please try again."));
+    }
+
+    const versesInHTML: HTMLElement[] = html.querySelectorAll(".v");
+
+    const versesArray: string[] = versesInHTML.map(
+      (verse: HTMLElement, verseNum: number) => {
+        return verse.text.replace(/[0-9+*]/g, "").trim();
+      }
+    );
+
+    res.status(200).json({ data: versesArray });
+  }
+);
+
 // Exporting all the handler functions
-export { getVerse, getVersesAmount, getNumberOfChapters };
+export { getVerse, getVersesAmount, getNumberOfChapters, getVersesInChapter };

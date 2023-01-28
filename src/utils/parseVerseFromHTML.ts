@@ -2,6 +2,7 @@ import { HTMLElement } from "node-html-parser";
 
 // Small helper to parse the verses
 function parseVerseFromHTML(html: HTMLElement, idString: string): string {
+  console.log(html);
   // Parsing the verse as plain text
   const verse: string = html
     .getElementById(idString)
