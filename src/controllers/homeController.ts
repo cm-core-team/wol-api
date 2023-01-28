@@ -10,16 +10,16 @@ import { NextFunction, Request, Response } from "express";
  * @param next
  */
 async function homeController(
-    req: Request,
-    res: Response,
-    next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): Promise<void> {
-    try {
-        res.status(200).send("Welcome to the wol-api.");
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+  try {
+    res.status(200).send("Welcome to the wol-api.");
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
 }
 
 export { homeController };

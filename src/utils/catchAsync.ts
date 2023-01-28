@@ -7,9 +7,9 @@ import { Request, Response, NextFunction } from "express";
  * @returns Returns a function
  */
 const catchAsync = (fn: any): any => {
-    return (req: Request, res: Response, next: NextFunction): void => {
-        fn(req, res, next).catch(next);
-    };
+  return (req: Request, res: Response, next: NextFunction): void => {
+    fn(req, res, next).catch(next);
+  };
 };
 
 export default catchAsync;
