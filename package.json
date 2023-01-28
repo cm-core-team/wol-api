@@ -39,7 +39,7 @@
     },
     "scripts": {
         "create-route": "npx ts-node-esm ./scripts/generateTemplates/generateRoutes.ts",
-        "compile": "tsc --watch",
+        "compile": "tsc",
         "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/server.ts",
         "start:prod": "node ./build/server.js",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/",
