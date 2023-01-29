@@ -1,6 +1,6 @@
 import { jest } from "@jest/globals";
 
-import app from "../../src/app";
+import app from "../../build/app";
 import request from "supertest";
 
 import axios, { AxiosResponse } from "axios";
