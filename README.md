@@ -13,7 +13,7 @@ And that's it really... for now ^\_~
 
 ## The Future?
 
-Hopefully I can expand on this concept to something ✨ amazing ✨ which plenty of people can benefit from.
+Hopefully I can expand on this concept to something ✨ amazing ✨ that plenty of people can benefit from.
 
 Possible ideas:
 
