@@ -1,32 +1,45 @@
 import { jest } from "@jest/globals";
 
 import app from "../../build/app";
+import { verseTestCases } from "./testCases";
+
 import request from "supertest";
+import { describe } from "node:test";
 
 jest.useFakeTimers();
 
-// THIS TEST IS OFF LIMITS FOR NOW
-// NEED TO FIX AN ISSUE AS I HAVE REFACTORED SOME CODE
-test("Test that the verse is correct. 📖", async (): Promise<void> => {
-  // Ids for the html element.
-  const ids: string[] = [
-    "v1-1-1-1",
-    "v59-4-8-1",
-    "v66-21-4-1",
-    "v19-37-11-1",
-    "v40-24-7-1",
-  ];
+async function testForVerse(testVerse: string, requestUrl: string) {
+  const expectedVerse = testVerse;
 
-  // Getting the verse text.
-  const expectedVerse =
-    "In the beginning God created the heavens and the earth.";
+  const response: request.Response = await request(app).get(requestUrl);
 
-  // Responses directly from the api.
-  // Made multiple requests to make sure that all the verses are correct.
-  const response1: request.Response = await request(app).get(
-    "/api/v1/bibleVerses/getVerse/1/1/1"
-  );
+  expect(response.body.data.verse).toBe(expectedVerse);
+}
 
-  // Comparing api response to the verse
-  expect(response1.body.data.verse).toBe(expectedVerse);
+describe("Verse", (): void => {
+  test("Test that the verse is correct. 📖", async (): Promise<void> => {
+    await testForVerse(verseTestCases[0].verse, verseTestCases[0].requestUrl);
+  });
+});
+
+describe("Verse", (): void => {
+  test("Test that the verse is correct.", async (): Promise<void> => {
+    await testForVerse(verseTestCases[1].verse, verseTestCases[1].requestUrl);
+  });
+});
+
+describe("Verse", (): void => {
+  test("Test that the verse is correct.", async (): Promise<void> => {
+    await testForVerse(verseTestCases[2].verse, verseTestCases[2].requestUrl);
+  });
+});
+describe("Verse", (): void => {
+  test("Test that the verse is correct.", async (): Promise<void> => {
+    await testForVerse(verseTestCases[3].verse, verseTestCases[3].requestUrl);
+  });
+});
+describe("Verse", (): void => {
+  test("Test that the verse is correct.", async (): Promise<void> => {
+    verseTestCases[4].verse, verseTestCases[4].requestUrl;
+  });
 });

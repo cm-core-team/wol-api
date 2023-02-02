@@ -9,7 +9,7 @@
   ],
   "rules": {
     "no-console": "warn",
-    "arrow-parens": "warn",
+    "arrow-parens": "off",
     "block-scoped-var": "warn",
 
     "indent": ["error", 2],

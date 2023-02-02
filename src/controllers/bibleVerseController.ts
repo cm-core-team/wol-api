@@ -25,8 +25,8 @@ const getVerse = catchAsync(
     );
 
     // Id for the html element containing the verse
-    const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-1`;
-    const verse: string = parseVerseFromHTML(htmlForVerse, idString);
+    const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-`;
+    const verse: any = parseVerseFromHTML(htmlForVerse, idString);
 
     // Also get the number of chapters in the book of the
     const htmlForNumberOfChapters: HTMLElement = await getHTML(
