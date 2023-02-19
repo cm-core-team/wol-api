@@ -16,30 +16,11 @@ async function testForVerse(testVerse: string, requestUrl: string) {
   expect(response.body.data.verse).toBe(expectedVerse);
 }
 
-describe("Verse", (): void => {
-  test("Test that the verse is correct. 📖", async (): Promise<void> => {
-    await testForVerse(verseTestCases[0].verse, verseTestCases[0].requestUrl);
-  });
-});
-
-describe("Verse", (): void => {
-  test("Test that the verse is correct.", async (): Promise<void> => {
-    await testForVerse(verseTestCases[1].verse, verseTestCases[1].requestUrl);
-  });
-});
-
-describe("Verse", (): void => {
-  test("Test that the verse is correct.", async (): Promise<void> => {
-    await testForVerse(verseTestCases[2].verse, verseTestCases[2].requestUrl);
-  });
-});
-describe("Verse", (): void => {
-  test("Test that the verse is correct.", async (): Promise<void> => {
-    await testForVerse(verseTestCases[3].verse, verseTestCases[3].requestUrl);
-  });
-});
-describe("Verse", (): void => {
-  test("Test that the verse is correct.", async (): Promise<void> => {
-    verseTestCases[4].verse, verseTestCases[4].requestUrl;
+// Using a loop to go through each test case
+verseTestCases.forEach(testCase => {
+  describe("Verse", (): void => {
+    test("Test that the verse is correct. 📖", async (): Promise<void> => {
+      await testForVerse(testCase.verse, testCase.requestUrl);
+    });
   });
 });
