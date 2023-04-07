@@ -1,8 +1,5 @@
-// Welcome to the bibleVerses route!
-
 import { Router } from "express";
 
-// Handlers
 import {
   getVerse,
   getVersesAmount,
@@ -13,7 +10,6 @@ import {
 const router: Router = Router();
 
 // Route handling.
-
 router.route("/getVerse/:book/:chapter/:verse").get(getVerse);
 router.route("/getVersesAmount/:book/:chapter").get(getVersesAmount);
 router.route("/getNumberOfChapters/:book").get(getNumberOfChapters);

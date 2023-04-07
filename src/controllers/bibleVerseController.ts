@@ -16,16 +16,16 @@ import parseVerseFromHTML from "../utils/parseVerseFromHTML.js";
  */
 const getVerse = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    // Getting the verse text
     const htmlForVerse: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=${req.params.book}:${req.params.chapter}:${req.params.verse}`
+      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=
+      ${req.params.book}:
+      ${req.params.chapter}:
+      ${req.params.verse}`
     );
 
-    // Id for the html element containing the verse
     const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-`;
     const verse: string = parseVerseFromHTML(htmlForVerse, idString);
 
-    // Also get the number of chapters in the book of the
     const htmlForNumberOfChapters: HTMLElement = await getHTML(
       `https://wol.jw.org/en/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
     );

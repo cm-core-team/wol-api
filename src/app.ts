@@ -7,7 +7,6 @@ import express, { Express, Request, Response, NextFunction } from "express";
 
 // Importing the routes.
 import bibleVerseRouter from "./routes/bibleVerseRoutes.js";
-import userRouter from "./routes/userRoutes.js";
 import { homeController } from "./controllers/homeController.js";
 
 // Express app.
@@ -38,7 +37,6 @@ process.env.NODE_ENV === "development"
 
 // Routes for the API.
 app.use("/api/v1/bibleVerses", bibleVerseRouter);
-app.use("/api/v1/users", userRouter);
 app.use("/", homeController);
 
 // Exporting express app so it can be used by other modules.
