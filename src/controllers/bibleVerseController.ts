@@ -17,7 +17,7 @@ import parseVerseFromHTML from "../utils/parseVerseFromHTML.js";
 const getVerse = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const htmlForVerse: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=
+      `https://wol.jw.org/${req.params.lang}/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover&v=
       ${req.params.book}:
       ${req.params.chapter}:
       ${req.params.verse}`
@@ -27,7 +27,7 @@ const getVerse = catchAsync(
     const verse: string = parseVerseFromHTML(htmlForVerse, idString);
 
     const htmlForNumberOfChapters: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
+      `https://wol.jw.org/${req.params.lang}/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
     );
     const amountOfChapters =
       htmlForNumberOfChapters.querySelectorAll(".chapter").length;
@@ -56,7 +56,7 @@ const getVerse = catchAsync(
 const getVersesAmount = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const html: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
+      `https://wol.jw.org/${req.params.lang}/wol/b/r1/lp-e/nwtsty/${req.params.book}/${req.params.chapter}#study=discover`
     );
 
     if (!html)
@@ -71,7 +71,7 @@ const getVersesAmount = catchAsync(
 const getNumberOfChapters = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const html: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
+      `https://wol.jw.org/${req.params.lang}/wol/binav/r1/lp-e/nwtsty/${req.params.book}`
     );
 
     if (!html) next(new Error("Server is not responding"));
@@ -85,7 +85,7 @@ const getVersesInChapter = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { book, chapter } = req.params;
     const html: HTMLElement = await getHTML(
-      `https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/${book}/${chapter}#study=discover`
+      `https://wol.jw.org/${req.params.lang}/wol/b/r1/lp-e/nwtsty/${book}/${chapter}#study=discover`
     );
 
     if (!html) {

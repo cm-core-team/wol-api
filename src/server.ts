@@ -5,9 +5,7 @@ dotenv.config({ path: "./src/.env" });
 
 // Importing the express app to create the server.
 import app from "./app.js";
-
-// DB
-import * as mongoose from "mongoose";
+import getAllLocales from "./utils/getAllLocales.js";
 
 // Some error handling
 process.on("uncaughtException", (err: Error) => {
