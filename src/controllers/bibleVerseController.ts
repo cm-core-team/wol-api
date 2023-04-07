@@ -1,12 +1,9 @@
-// Welcome to the controller for bibleVerses
-
 import { Request, Response, NextFunction } from "express";
 import { HTMLElement } from "node-html-parser";
 
 import getHTML from "../utils/getHTML.js";
 import catchAsync from "../utils/catchAsync.js";
 import parseVerseFromHTML from "../utils/parseVerseFromHTML.js";
-import console from "console";
 
 /**
  * Handler for getting a single verse
@@ -26,7 +23,7 @@ const getVerse = catchAsync(
 
     // Id for the html element containing the verse
     const idString = `v${req.params.book}-${req.params.chapter}-${req.params.verse}-`;
-    const verse: any = parseVerseFromHTML(htmlForVerse, idString);
+    const verse: string = parseVerseFromHTML(htmlForVerse, idString);
 
     // Also get the number of chapters in the book of the
     const htmlForNumberOfChapters: HTMLElement = await getHTML(
@@ -95,9 +92,9 @@ const getVersesInChapter = catchAsync(
       next(new Error("Invalid request, please try again."));
     }
 
-    const versesInHTML: HTMLElement[] = html.querySelectorAll(".v");
+    const elementsContainingVerses: HTMLElement[] = html.querySelectorAll(".v");
 
-    const versesArray: string[] = versesInHTML.map(
+    const versesArray: string[] = elementsContainingVerses.map(
       (verse: HTMLElement, verseNum: number) => {
         return verse.text.replace(/[0-9+*]/g, "").trim();
       }
