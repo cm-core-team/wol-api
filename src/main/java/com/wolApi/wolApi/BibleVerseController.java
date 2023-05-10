@@ -1,26 +1,35 @@
 package com.wolApi.wolApi;
 
-import org.jsoup.Connection;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 
 @RestController
 @RequestMapping("/api/v1/bible-verses")
 public class BibleVerseController {
-    @GetMapping("/get-verse")
-    public Verse getVerse() throws IOException {
-        Document doc = Jsoup.connect("https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/1/1#study=discover&v=1:1:1")
-                .get();
-        doc.select("p").forEach(System.out::println);
+    @GetMapping("/get-verse/{book}/{chapter}")
+    public VerseList getVerse(
+            @PathVariable("book") String book,
+            @PathVariable("chapter") String chapter) throws IOException {
+        Document doc = Jsoup.connect(
+                AppSettings.mainVerseURL(book, chapter)
+        ).get();
+        LinkedList<String> verses = new LinkedList<String>();
+        for (Element element : doc.select(".v")) {
+            String verse = element
+                    .text()
+                    .replaceAll("[0-9+*]", "");
+            verses.add(verse);
+        }
 
-        return new Verse("Welcome to the java port of this app");
+        return new VerseList(verses);
     }
-
 }
