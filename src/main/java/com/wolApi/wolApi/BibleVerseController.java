@@ -26,6 +26,8 @@ public class BibleVerseController {
         for (Element element : doc.select(".v")) {
             String verse = element
                     .text()
+                    .stripLeading()
+                    .stripTrailing()
                     .replaceAll("[0-9+*]", "");
             verses.add(verse);
         }
