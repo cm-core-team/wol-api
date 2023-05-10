@@ -20,7 +20,7 @@ public class BibleVerseController {
             @PathVariable("book") String book,
             @PathVariable("chapter") String chapter) throws IOException {
         Document doc = Jsoup.connect(
-                AppSettings.mainVerseURL(book, chapter)
+                AppSettings.getInstance().mainVerseURL(book, chapter)
         ).get();
         LinkedList<String> verses = new LinkedList<String>();
         for (Element element : doc.select(".v")) {
