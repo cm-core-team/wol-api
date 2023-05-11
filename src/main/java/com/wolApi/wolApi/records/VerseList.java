@@ -1,4 +1,4 @@
-package com.wolApi.wolApi;
+package com.wolApi.wolApi.records;
 
 import java.util.LinkedList;
 

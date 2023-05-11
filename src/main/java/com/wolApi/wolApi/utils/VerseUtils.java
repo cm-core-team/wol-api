@@ -1,5 +1,6 @@
-package com.wolApi.wolApi;
+package com.wolApi.wolApi.utils;
 
+import com.wolApi.wolApi.AppSettings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +18,7 @@ public class VerseUtils {
                 AppSettings.getInstance().mainVerseURL(book, chapter)
         ).get();
 
-        LinkedList<String> verses = new LinkedList<String>();
+        LinkedList<String> verses = new LinkedList<>();
         for (Element element : doc.select(".v")) {
             String verse = element
                     .text()
