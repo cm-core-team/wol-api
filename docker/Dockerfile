@@ -1,5 +1,13 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} /app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM eclipse-temurin:17-jdk-jammy
+
+
+RUN apt update && apt upgrade -y
+# Add user
+RUN useradd --create-home appuser
+WORKDIR /home/appuser
+VOLUME /home/appuser
+USER appuser
+
+COPY target/*.jar /app.jar
+
+CMD ["java","-jar", "/app.jar"]
