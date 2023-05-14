@@ -13,4 +13,4 @@ COPY . /home/appuser/
 RUN mvn install
 
 EXPOSE 8080
-CMD ["java","-jar", "/app.jar"]
+CMD ["java","-jar", "/home/appuser/app.jar"]
