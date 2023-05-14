@@ -6,7 +6,6 @@ RUN apt install -y maven
 RUN useradd --create-home appuser
 WORKDIR /home/appuser
 VOLUME /home/appuser
-USER appuser
 
 COPY . /home/appuser/
 RUN mvn install && \
