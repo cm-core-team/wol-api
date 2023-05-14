@@ -9,8 +9,8 @@ WORKDIR /home/appuser
 VOLUME /home/appuser
 USER appuser
 
+RUN mvn install
 COPY target/*.jar /home/appuser/app.jar
 
-RUN mvn install
 EXPOSE 8080
 CMD ["java","-jar", "/app.jar"]
