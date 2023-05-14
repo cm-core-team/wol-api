@@ -1,6 +1,5 @@
 FROM eclipse-temurin:17-jdk-jammy
 
-
 RUN apt update && apt upgrade -y
 RUN apt install -y maven
 # Add user
@@ -10,7 +9,8 @@ VOLUME /home/appuser
 USER appuser
 
 COPY . /home/appuser/
-RUN mvn install
+RUN mvn install && \
+    cp /home/appuser/target/*.jar /home/appuser/app.jar
 
 EXPOSE 8080
 CMD ["java","-jar", "/home/appuser/app.jar"]
