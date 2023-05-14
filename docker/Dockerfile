@@ -10,7 +10,7 @@ VOLUME /home/appuser
 USER appuser
 
 RUN mvn install
-COPY target/*.jar /home/appuser/app.jar
+COPY . /home/appuser/
 
 EXPOSE 8080
 CMD ["java","-jar", "/app.jar"]
