@@ -2,7 +2,6 @@ package com.wolApi.wolApi.controllers;
 
 import com.wolApi.wolApi.records.Verse;
 import com.wolApi.wolApi.services.BibleVerseService;
-import com.wolApi.wolApi.utils.VerseUtils;
 import com.wolApi.wolApi.records.VerseList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

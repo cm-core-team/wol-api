@@ -4,10 +4,12 @@ import com.wolApi.wolApi.records.Verse;
 import com.wolApi.wolApi.records.VerseList;
 import com.wolApi.wolApi.utils.VerseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
 
+@Service
 public class BibleVerseService {
 
     @Autowired
