@@ -3,7 +3,6 @@ package com.wolApi.wolApi.api.getVerse;
 import com.wolApi.wolApi.api.getVerse.dtos.Verse;
 import com.wolApi.wolApi.api.getVerse.dtos.VerseList;
 import com.wolApi.wolApi.api.getVerse.services.BibleVerseService;
-import com.wolApi.wolApi.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
