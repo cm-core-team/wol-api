@@ -1,4 +1,4 @@
-package com.wolApi.wolApi;
+package com.wolApi.wolApi.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

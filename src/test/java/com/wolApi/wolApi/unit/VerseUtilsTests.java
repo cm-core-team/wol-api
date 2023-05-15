@@ -1,8 +1,8 @@
-package com.wolApi.wolApi;
+package com.wolApi.wolApi.integration;
 
-import com.wolApi.wolApi.controllers.BibleVerseController;
-import com.wolApi.wolApi.records.Verse;
+import com.wolApi.wolApi.api.getVerse.dtos.Verse;
 import com.wolApi.wolApi.services.BibleVerseService;
+import com.wolApi.wolApi.api.getVerse.Services;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@WebMvcTest(BibleVerseController.class)
-public class BibleVerseControllerTests {
+@WebMvcTest(Services.class)
+public class VerseUtilsTests {
 
     @Autowired
     private MockMvc mvc;
@@ -30,4 +30,5 @@ public class BibleVerseControllerTests {
 
         mvc.perform(get("/api/v1/bible-verses/get-verse/1/1/1").contentType(MediaType.APPLICATION_JSON));
     }
+
 }

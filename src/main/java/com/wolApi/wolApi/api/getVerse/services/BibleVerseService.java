@@ -1,4 +1,4 @@
-package com.wolApi.wolApi.utils;
+package com.wolApi.wolApi.api.getVerse.services;
 
 import com.wolApi.wolApi.AppSettings;
 import org.jsoup.Jsoup;
@@ -8,20 +8,15 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class VerseUtils {
-    private static String constructVerseId(String book, String chapter, String verse) {
+
+public class BibleVerseService {
+    private String constructVerseId(String book, String chapter, String verse) {
         return String.format("v%s-%s-%s-1", book, chapter, verse);
     }
     /**
      * Get a specific verses given book, chapter, and verse
-     *
-     * @param book
-     * @param chapter
-     * @param verse
-     * @return Single verse text
-     * @throws IOException
      */
-    public static String getVerse(String book, String chapter, String verse) throws IOException {
+    public String getVerse(String book, String chapter, String verse) throws IOException {
         Document doc = Jsoup.connect(
                 AppSettings.getInstance().mainVerseURL(book, chapter)
         ).get();
@@ -36,13 +31,8 @@ public class VerseUtils {
 
     /**
      * Gets the verses in a chapter in a list.
-     *
-     * @param book
-     * @param chapter
-     * @return Verses in the chapter
-     * @throws IOException
      */
-    public static LinkedList<String> getVersesInChapter(
+    public LinkedList<String> getVersesInChapter(
             String book,
             String chapter) throws IOException {
         // HTML Parser
