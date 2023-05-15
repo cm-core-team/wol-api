@@ -17,15 +17,12 @@ public class BibleVerseService {
 
     }
 
-    @GetMapping("/get-verse/{book}/{chapter}/{verse}")
     public Verse getVerse(String book,
                           String chapter,
                           String verse) throws IOException {
         return new Verse(VerseUtils.getVerse(book, chapter, verse));
     }
 
-
-    @GetMapping("/get-verse/{book}/{chapter}")
     public VerseList getVerses(
             String book,
             String chapter) throws IOException {
