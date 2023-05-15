@@ -1,5 +1,0 @@
-node_modules
-jest.config.ts
-
-# Ignoring scripts because they are not that important and not heavily maintained.
-scripts
