@@ -1,0 +1,34 @@
+package com.wolApi.wolApi.services;
+
+import com.wolApi.wolApi.records.Verse;
+import com.wolApi.wolApi.records.VerseList;
+import com.wolApi.wolApi.utils.VerseUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.io.IOException;
+
+public class BibleVerseService {
+
+    @Autowired
+    public BibleVerseService() {
+
+    }
+
+    @GetMapping("/get-verse/{book}/{chapter}/{verse}")
+    public Verse getVerse(String book,
+                          String chapter,
+                          String verse) throws IOException {
+        return new Verse(VerseUtils.getVerse(book, chapter, verse));
+    }
+
+
+    @GetMapping("/get-verse/{book}/{chapter}")
+    public VerseList getVerses(
+            String book,
+            String chapter) throws IOException {
+        return new VerseList(
+                VerseUtils.getVersesInChapter(book, chapter)
+        );
+    }
+}

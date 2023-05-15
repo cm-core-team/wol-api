@@ -9,5 +9,4 @@ class WolApiApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
