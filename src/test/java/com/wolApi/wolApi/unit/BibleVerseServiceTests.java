@@ -10,18 +10,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(BibleVerseService.class)
-public class VerseUtilsTests {
-
-    @Autowired
-    private MockMvc mvc;
-
+public class BibleVerseServiceTests {
     @MockBean
     private BibleVerseService service;
 
-    @Test
-    public void returnSpecificVerse() throws Exception {
-        String testVerse = "In the beginning God created the heavens and the earth.";
-        given(service.getVerse("1", "1", "1")).willReturn(testVerse);
+    BibleVerseServiceTests() {
+        service = new BibleVerseService();
     }
+
+//    @Test
+//    public void returnSpecificVerse() throws Exception {
+////        String testVerse = "In the beginning God created the heavens and the earth.";
+////        System.out.println(service.getVerse("1", "1", "1"));
+////        given(service.getVerse("1", "1", "1")).willReturn(testVerse);
+//    }
 
 }
