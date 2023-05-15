@@ -5,11 +5,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.util.LinkedList;
 
 public class VerseUtils {
+    private static String constructVerseId(String book, String chapter, String verse) {
+        return String.format("v%s-%s-%s-1", book, chapter, verse);
+    }
     /**
      * Get a specific verses given book, chapter, and verse
      *
@@ -23,7 +25,7 @@ public class VerseUtils {
         Document doc = Jsoup.connect(
                 AppSettings.getInstance().mainVerseURL(book, chapter)
         ).get();
-        String verseIdString = AppSettings.getInstance().getVerseID(book, chapter, verse);
+        String verseIdString = constructVerseId(book, chapter, verse);
 
         return doc.select("#" + verseIdString)
                 .text()

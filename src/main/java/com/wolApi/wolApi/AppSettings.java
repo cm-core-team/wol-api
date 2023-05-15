@@ -20,8 +20,6 @@ public class AppSettings {
                 chapterIndex);
     }
 
-    public String getVerseID(String book, String chapter, String verse) {
-        return String.format("v%s-%s-%s-1", book, chapter, verse);
-    }
+
 
 }
