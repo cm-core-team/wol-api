@@ -20,9 +20,9 @@ public class BibleVerseServiceTests {
 
 //    @Test
 //    public void returnSpecificVerse() throws Exception {
-////        String testVerse = "In the beginning God created the heavens and the earth.";
-////        System.out.println(service.getVerse("1", "1", "1"));
-////        given(service.getVerse("1", "1", "1")).willReturn(testVerse);
+//        String testVerse = "In the beginning God created the heavens and the earth.";
+//        System.out.println(service.getVerse("1", "1", "1"));
+//        given(service.getVerse("1", "1", "1")).willReturn(testVerse);
 //    }
 
 }

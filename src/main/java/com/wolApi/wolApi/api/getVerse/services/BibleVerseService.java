@@ -4,12 +4,17 @@ import com.wolApi.wolApi.AppSettings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.LinkedList;
 
 
+@Service
 public class BibleVerseService {
+
+    public BibleVerseService() {}
+
     private String constructVerseId(String book, String chapter, String verse) {
         return String.format("v%s-%s-%s-1", book, chapter, verse);
     }
