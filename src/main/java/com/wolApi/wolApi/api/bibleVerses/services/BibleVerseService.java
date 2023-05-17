@@ -1,4 +1,4 @@
-package com.wolApi.wolApi.api.getVerse.services;
+package com.wolApi.wolApi.api.bibleVerses.services;
 
 import com.wolApi.wolApi.AppSettings;
 import org.jsoup.Jsoup;

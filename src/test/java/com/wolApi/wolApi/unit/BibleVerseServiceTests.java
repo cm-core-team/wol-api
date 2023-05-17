@@ -1,13 +1,8 @@
 package com.wolApi.wolApi.unit;
 
-import com.wolApi.wolApi.api.getVerse.services.BibleVerseService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(BibleVerseService.class)
 public class BibleVerseServiceTests {
