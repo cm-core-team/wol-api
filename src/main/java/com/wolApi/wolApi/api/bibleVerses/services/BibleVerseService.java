@@ -12,7 +12,6 @@ import java.util.LinkedList;
 
 @Service
 public class BibleVerseService {
-
     public BibleVerseService() {}
 
     private String constructVerseId(String book, String chapter, String verse) {
