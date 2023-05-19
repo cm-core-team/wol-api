@@ -27,9 +27,9 @@ public class BibleVerseViews {
                           @PathVariable("verseNum") String verseNum) throws IOException, InterruptedException {
         return new Verse(
                 bibleVerseService.getVerse(bookNum, chapterNum, verseNum),
-                bibleVerseService.getNumVersesInChapter(bookNum, chapterNum),
-                bibleVerseService.getNumChaptersInBook(bookNum),
-                bibleVerseService.getBookName(bookNum)
+                bibleVerseService.getNumVersesInChapter(chapterNum),
+                bibleVerseService.getNumChaptersInBook(),
+                bibleVerseService.getBookName()
         );
     }
 

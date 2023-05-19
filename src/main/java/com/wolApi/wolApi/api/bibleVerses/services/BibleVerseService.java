@@ -20,6 +20,8 @@ import java.util.LinkedList;
 public class BibleVerseService {
     public BibleVerseService() {}
 
+    private JsonNode jsonForExtraVerseInfo;
+
     private String extractVerseFromHtml(String bookNum, String chapterNum, String verseNum) throws IOException {
         Document doc = Jsoup.connect(
                 AppSettings.getInstance().mainVerseURL(bookNum, chapterNum)
@@ -33,7 +35,11 @@ public class BibleVerseService {
                 .stripTrailing();
     }
 
-    private JsonNode getJsonDataForExtraVerseInfo(URI uri) throws IOException, InterruptedException {
+    private JsonNode getJsonDataForExtraVerseInfo(String bookNum) throws IOException, InterruptedException {
+        URI uri = URI.create(String
+                .format("https://b.jw-cdn.org/apis/pub-media/GETPUBMEDIALINKS?pub=nwt&langwritten=E&txtCMSLang=E&fileformat=mp3&booknum=%s",
+                        bookNum));
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .build();
@@ -52,16 +58,29 @@ public class BibleVerseService {
     /**
      * Get a specific verses given book, chapter, and verse
      */
-    public String getVerse(String bookNum, String chapterNum, String verseNum) throws IOException {
+    public String getVerse(String bookNum, String chapterNum, String verseNum) throws IOException,
+            InterruptedException {
+        this.jsonForExtraVerseInfo = getJsonDataForExtraVerseInfo(bookNum);
         String verse = extractVerseFromHtml(bookNum, chapterNum, verseNum);
         return verse;
     }
 
-    public int getNumChaptersInBook(String bookNum) throws IOException, InterruptedException {
-        URI uri = URI.create(String
-                .format("https://b.jw-cdn.org/apis/pub-media/GETPUBMEDIALINKS?pub=nwt&langwritten=E&txtCMSLang=E&fileformat=mp3&booknum=%s",
-                        bookNum));
-        JsonNode json = getJsonDataForExtraVerseInfo(uri);
+    public int getNumVersesInChapter(String chapterNum) {
+        JsonNode json = this.jsonForExtraVerseInfo;
+        int numVerses = json
+                .get("files")
+                .get("E")
+                .get("MP3")
+                .get(Integer.parseInt(chapterNum) - 1)
+                .get("markers")
+                .get("markers")
+                .size();
+
+        return numVerses;
+    }
+
+    public int getNumChaptersInBook() {
+        JsonNode json = this.jsonForExtraVerseInfo;
         int numChapters = json
                         .get("files")
                         .get("E")
@@ -71,28 +90,10 @@ public class BibleVerseService {
         return numChapters;
     }
 
-    public int getNumVersesInChapter(String bookNum, String chapterNum) throws IOException, InterruptedException {
-        URI uri = URI.create(String
-                .format("https://b.jw-cdn.org/apis/pub-media/GETPUBMEDIALINKS?pub=nwt&langwritten=E&txtCMSLang=E&fileformat=mp3&booknum=%s",
-                        bookNum));
-        JsonNode json = getJsonDataForExtraVerseInfo(uri);
-        int numVerses = json
-                        .get("files")
-                        .get("E")
-                        .get("MP3")
-                        .get(Integer.parseInt(chapterNum) - 1)
-                        .get("markers")
-                        .get("markers")
-                        .size();
 
-        return numVerses;
-    }
 
-    public String getBookName(String bookNum) throws IOException, InterruptedException {
-        URI uri = URI.create(String
-                .format("https://b.jw-cdn.org/apis/pub-media/GETPUBMEDIALINKS?pub=nwt&langwritten=E&txtCMSLang=E&fileformat=mp3&booknum=%s",
-                        bookNum));
-        JsonNode json = getJsonDataForExtraVerseInfo(uri);
+    public String getBookName() {
+        JsonNode json = this.jsonForExtraVerseInfo;
         String bookName = json
                         .get("pubName")
                         .asText();
