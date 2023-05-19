@@ -1,4 +1,4 @@
-package com.wolApi.wolApi.records;
+package com.wolApi.wolApi.api.bibleVerses.dtos;
 
 import java.util.LinkedList;
 
