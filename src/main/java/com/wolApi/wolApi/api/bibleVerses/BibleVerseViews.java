@@ -21,20 +21,23 @@ public class BibleVerseViews {
     public BibleVerseViews(BibleVerseService bibleVerseService) {
         this.bibleVerseService = bibleVerseService;
     }
-    @GetMapping("/get-verse/{book}/{chapter}/{verse}")
-    public Verse getVerse(@PathVariable("book") String book,
-                          @PathVariable("chapter") String chapter,
-                          @PathVariable("verse") String verse) throws IOException {
+    @GetMapping("/get-verse/{bookNum}/{chapterNum}/{verseNum}")
+    public Verse getVerse(@PathVariable("bookNum") String bookNum,
+                          @PathVariable("chapterNum") String chapterNum,
+                          @PathVariable("verseNum") String verseNum) throws IOException, InterruptedException {
         return new Verse(
-                bibleVerseService.getVerse(book, chapter, verse)
+                bibleVerseService.getVerse(bookNum, chapterNum, verseNum),
+                bibleVerseService.getNumVersesInChapter(bookNum, chapterNum),
+                bibleVerseService.getNumChaptersInBook(bookNum),
+                bibleVerseService.getBookName(bookNum)
         );
     }
 
     @GetMapping("/get-verse/{book}/{chapter}")
-    public VerseList getVerses(@PathVariable("book") String book,
-                               @PathVariable("chapter") String chapter) throws IOException {
+    public VerseList getVerses(@PathVariable("bookNum") String bookNum,
+                               @PathVariable("chapterNum") String chapterNum) throws IOException {
         return new VerseList(
-                bibleVerseService.getVersesInChapter(book, chapter)
+                bibleVerseService.getVersesInChapter(bookNum, chapterNum)
         );
     }
 }
