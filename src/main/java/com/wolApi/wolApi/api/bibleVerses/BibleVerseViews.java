@@ -33,7 +33,7 @@ public class BibleVerseViews {
         );
     }
 
-    @GetMapping("/get-verse/{book}/{chapter}")
+    @GetMapping("/get-verse/{bookNum}/{chapterNum}")
     public VerseList getVerses(@PathVariable("bookNum") String bookNum,
                                @PathVariable("chapterNum") String chapterNum) throws IOException {
         return new VerseList(
