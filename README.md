@@ -21,11 +21,6 @@ Possible ideas:
 -   Maybe show the footnotes of the verses and cross-references.
 -   Check the discussions for more!
 
-## API Documentation
-
-Documentation is in the process.
-
-
 ## Deployment
 
 Since our recent migration to Java this app is not currently deployed anywhere.
