@@ -4,10 +4,7 @@ import com.wolApi.wolApi.api.bibleVerses.dtos.Verse;
 import com.wolApi.wolApi.api.bibleVerses.dtos.VerseList;
 import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -21,20 +18,23 @@ public class BibleVerseViews {
     public BibleVerseViews(BibleVerseService bibleVerseService) {
         this.bibleVerseService = bibleVerseService;
     }
-    @GetMapping("/get-verse/{book}/{chapter}/{verse}")
-    public Verse getVerse(@PathVariable("book") String book,
-                          @PathVariable("chapter") String chapter,
-                          @PathVariable("verse") String verse) throws IOException {
+    @GetMapping("/get-verse")
+    public Verse getVerse(@RequestParam String bookNum,
+                          @RequestParam String chapterNum,
+                          @RequestParam String verseNum) throws IOException, InterruptedException {
         return new Verse(
-                bibleVerseService.getVerse(book, chapter, verse)
+                bibleVerseService.getVerse(bookNum, chapterNum, verseNum),
+                bibleVerseService.getNumVersesInChapter(chapterNum),
+                bibleVerseService.getNumChaptersInBook(),
+                bibleVerseService.getBookName()
         );
     }
 
-    @GetMapping("/get-verse/{book}/{chapter}")
-    public VerseList getVerses(@PathVariable("book") String book,
-                               @PathVariable("chapter") String chapter) throws IOException {
+    @GetMapping("/get-verses")
+    public VerseList getVerses(@RequestParam String bookNum,
+                               @RequestParam String chapterNum) throws IOException {
         return new VerseList(
-                bibleVerseService.getVersesInChapter(book, chapter)
+                bibleVerseService.getVersesInChapter(bookNum, chapterNum)
         );
     }
 }

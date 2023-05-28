@@ -13,11 +13,11 @@ public class AppSettings {
         return INSTANCE;
     }
 
-    public String mainVerseURL(String bookIndex, String chapterIndex) {
+    public String mainVerseURL(String bookNum, String chapterNum) {
         return String.format(
                 "https://wol.jw.org/en/wol/b/r1/lp-e/nwtsty/%s/%s#study=discover",
-                bookIndex,
-                chapterIndex);
+                bookNum,
+                chapterNum);
     }
 
 
