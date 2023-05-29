@@ -1,6 +1,5 @@
 package com.wolApi.wolApi.api.bibleVerses;
 
-import com.wolApi.wolApi.api.bibleVerses.dtos.Verse;
 import com.wolApi.wolApi.api.bibleVerses.dtos.VerseList;
 import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +18,10 @@ public class BibleVerseViews {
         this.bibleVerseService = bibleVerseService;
     }
     @GetMapping("/get-verse")
-    public Verse getVerse(@RequestParam String bookNum,
-                          @RequestParam String chapterNum,
-                          @RequestParam String verseNum) throws IOException, InterruptedException {
-        return new Verse(
-                bibleVerseService.getVerse(bookNum, chapterNum, verseNum),
-                bibleVerseService.getNumVersesInChapter(chapterNum),
-                bibleVerseService.getNumChaptersInBook(),
-                bibleVerseService.getBookName()
-        );
+    public BibleVerse getVerse(@RequestParam String bookNum,
+                               @RequestParam String chapterNum,
+                               @RequestParam String verseNum) throws IOException, InterruptedException {
+        return bibleVerseService.getBibleVerse(bookNum, chapterNum, verseNum);
     }
 
     @GetMapping("/get-verses")
