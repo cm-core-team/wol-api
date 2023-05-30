@@ -20,7 +20,7 @@ public class BibleVerseViews {
     @GetMapping("/get-verse")
     public BibleVerse getVerse(@RequestParam String bookNum,
                                @RequestParam String chapterNum,
-                               @RequestParam String verseNum) throws IOException, InterruptedException {
+                               @RequestParam String verseNum) {
         return bibleVerseService.getBibleVerse(bookNum, chapterNum, verseNum);
     }
 
