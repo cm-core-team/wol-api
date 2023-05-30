@@ -23,7 +23,7 @@ public class BibleVerseService {
      * Get a specific verses given book, chapter, and verse
      */
     public BibleVerse getBibleVerse(String bookNum, String chapterNum, String verseNum) {
-        return bibleVerseRepository.findBibleVerseByBookNameAndChapterNumAndVerseNum(bookNum, chapterNum, verseNum);
+        return bibleVerseRepository.findBibleVerse(bookNum, chapterNum, verseNum);
     }
 
     /**
