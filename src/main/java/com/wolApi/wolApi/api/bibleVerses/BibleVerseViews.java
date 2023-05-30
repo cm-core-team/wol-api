@@ -1,11 +1,10 @@
 package com.wolApi.wolApi.api.bibleVerses;
 
-import com.wolApi.wolApi.api.bibleVerses.dtos.VerseList;
 import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.LinkedList;
 
 
 @RestController
@@ -18,17 +17,16 @@ public class BibleVerseViews {
         this.bibleVerseService = bibleVerseService;
     }
     @GetMapping("/get-verse")
-    public BibleVerse getVerse(@RequestParam String bookNum,
-                               @RequestParam String chapterNum,
-                               @RequestParam String verseNum) {
+    public BibleVerse getVerse(@RequestParam int bookNum,
+                               @RequestParam int chapterNum,
+                               @RequestParam int verseNum) {
         return bibleVerseService.getBibleVerse(bookNum, chapterNum, verseNum);
     }
 
     @GetMapping("/get-verses")
-    public VerseList getVerses(@RequestParam String bookNum,
-                               @RequestParam String chapterNum) throws IOException {
-        return new VerseList(
-                bibleVerseService.getVersesInChapter(bookNum, chapterNum)
-        );
+    public LinkedList<BibleVerse> getVerses(
+                                @RequestParam int bookNum,
+                                @RequestParam int chapterNum) {
+        return bibleVerseService.getVersesInChapter(bookNum, chapterNum);
     }
 }

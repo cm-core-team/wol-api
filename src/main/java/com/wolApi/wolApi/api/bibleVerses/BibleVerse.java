@@ -9,28 +9,34 @@ public class BibleVerse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String verse;
+    private int chapter;
+    private String bookName;
+    private int bookNum;
     private int numVersesInChapter;
     private int numChaptersInBook;
-    private String bookName;
     private String language;
 
     public BibleVerse() {
     }
 
-    public BibleVerse(Long id, String verse, int numVersesInChapter, int numChaptersInBook, String bookName, String language) {
+    public BibleVerse(Long id, String verse, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
         this.id = id;
         this.verse = verse;
+        this.chapter = chapter;
+        this.bookName = bookName;
+        this.bookNum = bookNum;
         this.numVersesInChapter = numVersesInChapter;
         this.numChaptersInBook = numChaptersInBook;
-        this.bookName = bookName;
         this.language = language;
     }
 
-    public BibleVerse(String verse, int numVersesInChapter, int numChaptersInBook, String bookName, String language) {
+    public BibleVerse(String verse, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
         this.verse = verse;
+        this.chapter = chapter;
+        this.bookName = bookName;
+        this.bookNum = bookNum;
         this.numVersesInChapter = numVersesInChapter;
         this.numChaptersInBook = numChaptersInBook;
-        this.bookName = bookName;
         this.language = language;
     }
 
@@ -50,6 +56,30 @@ public class BibleVerse {
         this.verse = verse;
     }
 
+    public int getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(int chapter) {
+        this.chapter = chapter;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public int getBookNum() {
+        return bookNum;
+    }
+
+    public void setBookNum(int bookNum) {
+        this.bookNum = bookNum;
+    }
+
     public int getNumVersesInChapter() {
         return numVersesInChapter;
     }
@@ -64,14 +94,6 @@ public class BibleVerse {
 
     public void setNumChaptersInBook(int numChaptersInBook) {
         this.numChaptersInBook = numChaptersInBook;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
     }
 
     public String getLanguage() {
