@@ -1,4 +1,4 @@
-package com.wolApi.wolApi.api.bibleVerses;
+package com.wolApi.wolApi.api.bibleVerses.entities;
 
 import jakarta.persistence.*;
 
@@ -9,6 +9,7 @@ public class BibleVerse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String verse;
+    private int verseNum;
     private int chapter;
     private String bookName;
     private int bookNum;
@@ -19,9 +20,10 @@ public class BibleVerse {
     public BibleVerse() {
     }
 
-    public BibleVerse(Long id, String verse, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
+    public BibleVerse(Long id, String verse, int verseNum, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
         this.id = id;
         this.verse = verse;
+        this.verseNum = verseNum;
         this.chapter = chapter;
         this.bookName = bookName;
         this.bookNum = bookNum;
@@ -30,8 +32,9 @@ public class BibleVerse {
         this.language = language;
     }
 
-    public BibleVerse(String verse, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
+    public BibleVerse(String verse, int verseNum, int chapter, String bookName, int bookNum, int numVersesInChapter, int numChaptersInBook, String language) {
         this.verse = verse;
+        this.verseNum = verseNum;
         this.chapter = chapter;
         this.bookName = bookName;
         this.bookNum = bookNum;

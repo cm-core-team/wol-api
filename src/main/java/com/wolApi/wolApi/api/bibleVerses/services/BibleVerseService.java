@@ -1,10 +1,10 @@
 package com.wolApi.wolApi.api.bibleVerses.services;
 
-import com.wolApi.wolApi.api.bibleVerses.BibleVerse;
+import com.wolApi.wolApi.api.bibleVerses.entities.BibleVerse;
 import com.wolApi.wolApi.api.bibleVerses.BibleVerseRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
+import java.util.List;
 
 
 @Service
@@ -25,7 +25,7 @@ public class BibleVerseService {
     /**
      * Gets the verses in a chapter in a list.
      */
-    public LinkedList<BibleVerse> getVersesInChapter(
+    public List<BibleVerse> getVersesInChapter(
             int bookNum,
             int chapter) {
 

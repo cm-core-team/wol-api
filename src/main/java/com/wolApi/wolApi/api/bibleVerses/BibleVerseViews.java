@@ -1,10 +1,11 @@
 package com.wolApi.wolApi.api.bibleVerses;
 
+import com.wolApi.wolApi.api.bibleVerses.entities.BibleVerse;
 import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
+import java.util.List;
 
 
 @RestController
@@ -24,7 +25,7 @@ public class BibleVerseViews {
     }
 
     @GetMapping("/get-verses")
-    public LinkedList<BibleVerse> getVerses(
+    public List<BibleVerse> getVerses(
                                 @RequestParam int bookNum,
                                 @RequestParam int chapterNum) {
         return bibleVerseService.getVersesInChapter(bookNum, chapterNum);
