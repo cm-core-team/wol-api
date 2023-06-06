@@ -1,12 +1,11 @@
 package com.wolApi.wolApi.api.bibleVerses;
 
-import com.wolApi.wolApi.api.bibleVerses.dtos.Verse;
-import com.wolApi.wolApi.api.bibleVerses.dtos.VerseList;
+import com.wolApi.wolApi.api.bibleVerses.entities.BibleVerse;
 import com.wolApi.wolApi.api.bibleVerses.services.BibleVerseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -19,22 +18,16 @@ public class BibleVerseViews {
         this.bibleVerseService = bibleVerseService;
     }
     @GetMapping("/get-verse")
-    public Verse getVerse(@RequestParam String bookNum,
-                          @RequestParam String chapterNum,
-                          @RequestParam String verseNum) throws IOException, InterruptedException {
-        return new Verse(
-                bibleVerseService.getVerse(bookNum, chapterNum, verseNum),
-                bibleVerseService.getNumVersesInChapter(chapterNum),
-                bibleVerseService.getNumChaptersInBook(),
-                bibleVerseService.getBookName()
-        );
+    public BibleVerse getVerse(@RequestParam int bookNum,
+                               @RequestParam int chapterNum,
+                               @RequestParam int verseNum) {
+        return bibleVerseService.getBibleVerse(bookNum, chapterNum, verseNum);
     }
 
     @GetMapping("/get-verses")
-    public VerseList getVerses(@RequestParam String bookNum,
-                               @RequestParam String chapterNum) throws IOException {
-        return new VerseList(
-                bibleVerseService.getVersesInChapter(bookNum, chapterNum)
-        );
+    public List<BibleVerse> getVerses(
+                                @RequestParam int bookNum,
+                                @RequestParam int chapterNum) {
+        return bibleVerseService.getVersesInChapter(bookNum, chapterNum);
     }
 }
