@@ -1,0 +1,13 @@
+name: wol-api
+
+services:
+  db:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: USERNAME
+      POSTGRES_PASSWORD: PASSWORD
+      POSTGRES_DB: wol-api
+    ports:
+      - 5432:5432
