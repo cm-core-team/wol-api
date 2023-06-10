@@ -34,3 +34,5 @@ build/
 
 ### DB ###
 application.properties
+
+.DS_Store

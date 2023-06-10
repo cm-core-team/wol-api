@@ -2,6 +2,9 @@ name: wol-api
 
 services:
   db:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
     container_name: postgres_container
     image: postgres
     restart: always
