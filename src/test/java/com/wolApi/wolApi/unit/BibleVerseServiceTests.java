@@ -10,7 +10,7 @@ public class BibleVerseServiceTests {
     private BibleVerseService service;
 
     BibleVerseServiceTests() {
-        service = new BibleVerseService();
+        // service = new BibleVerseService();
     }
 
 //    @Test
