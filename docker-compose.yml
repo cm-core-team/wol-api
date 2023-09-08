@@ -1,7 +1,12 @@
-name: wol-api-backend
+name: wol-api
 
 services:
   backend:
+    volumes:
+      - ./backend:/home/appuser
     build:
       context: .
       dockerfile: ./docker/Dockerfile
+  
+    ports:
+      - 8000:8000
