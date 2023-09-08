@@ -1,0 +1,7 @@
+name: wol-api-backend
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
