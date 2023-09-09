@@ -31,7 +31,7 @@ fn bible_verses() -> Json<BibleVerses> {
         )],
     };
 
-    Json(example_bible_verses)
+    return Json(example_bible_verses);
 }
 
 #[launch]
