@@ -13,6 +13,6 @@ COPY ./backend /home/appuser/
 RUN rustup update && rustup default stable
 
 EXPOSE 8000
-CMD ["cargo", "run"]
+CMD ["cargo", "run", "--bin", "backend"]
 
 # http://127.0.0.1:8000/api/v1/bible-verses
