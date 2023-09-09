@@ -11,6 +11,8 @@ services:
       - 8000:8000
   
   db:
+    networks:
+      - wol-api-network
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
@@ -24,3 +26,6 @@ services:
 volumes:
   postgres-db:
     driver: local
+
+networks:
+  wol-api-network:

@@ -12,7 +12,6 @@ COPY ./backend /home/appuser/
 # ensure rust is on the latest stable version
 RUN rustup update && rustup default stable
 
-
 EXPOSE 8000
 CMD ["cargo", "run"]
 
