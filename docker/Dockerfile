@@ -9,8 +9,9 @@ VOLUME /home/appuser
 
 COPY ./backend /home/appuser/
 
-ENV ROCKET_ADDRESS="0.0.0.0"
-# RUN cargo install --path .
+# ensure rust is on the latest stable version
+RUN rustup update && rustup default stable
+
 
 EXPOSE 8000
 CMD ["cargo", "run"]
