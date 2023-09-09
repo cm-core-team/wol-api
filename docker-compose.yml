@@ -2,6 +2,8 @@ name: wol-api
 
 services:
   backend:
+    networks:
+        - wol-api-network
     volumes:
       - ./backend:/home/appuser
     build:
