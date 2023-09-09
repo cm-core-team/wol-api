@@ -1,5 +1,9 @@
 [default]
 address = "0.0.0.0"
 
+[default.databases]
+postgres_db = { url = "postgresql://postgres:postgres@db/wol-api" }
+
 [debug]
 port = 8000
+
