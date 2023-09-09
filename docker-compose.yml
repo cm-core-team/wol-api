@@ -3,7 +3,7 @@ name: wol-api
 services:
   backend:
     networks:
-        - wol-api-network
+      - wol-api-network
     volumes:
       - ./backend:/home/appuser
     build:
@@ -11,19 +11,20 @@ services:
       dockerfile: ./docker/Dockerfile
     ports:
       - 8000:8000
-  
+
   db:
     networks:
       - wol-api-network
     image: postgres:latest
     environment:
+      POSTGRES_DB: wol-api
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
     ports:
       - 5432:5432
     volumes:
-       - postgres-db:/data/postgres
+      - postgres-db:/data/postgres
 
 volumes:
   postgres-db:

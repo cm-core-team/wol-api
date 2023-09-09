@@ -2,6 +2,9 @@
 extern crate rocket;
 
 use rocket::serde::{json::Json, Serialize};
+// use rocket_db_pools::{sqlx, Database};
+
+mod seeder;
 
 // for now
 #[get("/")]
