@@ -1,6 +1,6 @@
 FROM rust:latest
 
-RUN apt-get update && apt-get --no-install-recommends install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y iputils-ping\
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --create-home appuser
