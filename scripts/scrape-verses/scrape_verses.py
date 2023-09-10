@@ -15,7 +15,7 @@ def main():
     book_nums = list(range(1, 67))
 
     # map of books to chapters to verse content
-    data = {}
+    data = []
     urls = []
 
     # generate a list of URLs for each chapter
@@ -61,12 +61,10 @@ def main():
             for result in tqdm(executor.map(fetch_and_extract, args), total=len(urls), desc="Scraping"):
                 if result:
                     book_num, chapter_num, chapter_data = result
-                    if book_num not in data:
-                        data[book_num] = {}
-                    data[book_num][chapter_num] = chapter_data
+                    data.append({"book": book_num, "chapter": chapter_num, "verses": chapter_data})
     
     with open("verses.json", "w") as f:
-        json.dump(data, f)
+        json.dump({"data": data}, f)
 
 
 class BibleExtractor:
