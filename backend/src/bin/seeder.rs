@@ -1,24 +1,79 @@
 use std::collections::HashMap;
 
+use rocket::serde::{json, Deserialize, Serialize};
+use rocket::tokio;
 use rocket_db_pools::sqlx;
 use rocket_db_pools::{sqlx::postgres::PgPoolOptions, Database};
-use rocket::tokio;
-use rocket::serde::{Serialize, Deserialize, json};
 
 const VERSES_JSON_PATH: &str = "../data/verses.json";
 const BIBLE_BOOKS: [&str; 66] = [
-    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges",
-    "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
-    "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes",
-    "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
-    "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum",
-    "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi", "Matthew", "Mark",
-    "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians", "Galatians",
-    "Ephesians", "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians",
-    "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews", "James", "1 Peter",
-    "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"
+    "Genesis",
+    "Exodus",
+    "Leviticus",
+    "Numbers",
+    "Deuteronomy",
+    "Joshua",
+    "Judges",
+    "Ruth",
+    "1 Samuel",
+    "2 Samuel",
+    "1 Kings",
+    "2 Kings",
+    "1 Chronicles",
+    "2 Chronicles",
+    "Ezra",
+    "Nehemiah",
+    "Esther",
+    "Job",
+    "Psalms",
+    "Proverbs",
+    "Ecclesiastes",
+    "Song of Solomon",
+    "Isaiah",
+    "Jeremiah",
+    "Lamentations",
+    "Ezekiel",
+    "Daniel",
+    "Hosea",
+    "Joel",
+    "Amos",
+    "Obadiah",
+    "Jonah",
+    "Micah",
+    "Nahum",
+    "Habakkuk",
+    "Zephaniah",
+    "Haggai",
+    "Zechariah",
+    "Malachi",
+    "Matthew",
+    "Mark",
+    "Luke",
+    "John",
+    "Acts",
+    "Romans",
+    "1 Corinthians",
+    "2 Corinthians",
+    "Galatians",
+    "Ephesians",
+    "Philippians",
+    "Colossians",
+    "1 Thessalonians",
+    "2 Thessalonians",
+    "1 Timothy",
+    "2 Timothy",
+    "Titus",
+    "Philemon",
+    "Hebrews",
+    "James",
+    "1 Peter",
+    "2 Peter",
+    "1 John",
+    "2 John",
+    "3 John",
+    "Jude",
+    "Revelation",
 ];
-
 
 #[derive(Database)]
 #[database("wol-api")]
@@ -69,19 +124,22 @@ async fn create_verse_table(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
     return Ok(());
 }
 
-async fn insert_verse_into_table(verse: &BibleVerse, pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
+async fn insert_verse_into_table(
+    verse: &BibleVerse,
+    pool: &sqlx::PgPool,
+) -> Result<(), sqlx::Error> {
     sqlx::query(
         r#"INSERT INTO verses
         (book_num, book_name, chapter, verse_num, verse_text)
-        VALUES ($1, $2, $3, $4, $5)"#
+        VALUES ($1, $2, $3, $4, $5)"#,
     )
-        .bind(verse.book_num)
-        .bind(verse.book_name.clone())
-        .bind(verse.chapter)
-        .bind(verse.verse_num)
-        .bind(verse.verse_text.clone())
-        .execute(pool)
-        .await?;
+    .bind(verse.book_num)
+    .bind(verse.book_name.clone())
+    .bind(verse.chapter)
+    .bind(verse.verse_num)
+    .bind(verse.verse_text.clone())
+    .execute(pool)
+    .await?;
 
     return Ok(());
 }
@@ -108,10 +166,11 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
 
     println!("Inserting {} verses into database...", n_verses);
 
-    for (i, json_verse) in json_verses.unwrap().iter().enumerate() {
+    for (_i, json_verse) in json_verses.unwrap().iter().enumerate() {
         for verse_text in json_verse.verses.iter() {
+            let index_for_book_name = (json_verse.book as usize) - 1;
             let verse = BibleVerse {
-                book_name: BIBLE_BOOKS[i].to_string(),
+                book_name: BIBLE_BOOKS[index_for_book_name].to_string(),
                 book_num: json_verse.book,
                 chapter: json_verse.chapter,
                 verse_num: verse_text.0.parse::<i32>().unwrap(),
@@ -119,8 +178,10 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
             };
             let insert_result = insert_verse_into_table(&verse, pool).await;
             match insert_result {
-                Ok(_) => println!("Inserted verse: {} {}:{}",
-                    verse.book_name, verse.chapter, verse.verse_num),
+                Ok(_) => println!(
+                    "Inserted verse: {} {}:{}",
+                    verse.book_name, verse.chapter, verse.verse_num
+                ),
                 Err(e) => println!("Error inserting verse: {}", e),
             };
         }
