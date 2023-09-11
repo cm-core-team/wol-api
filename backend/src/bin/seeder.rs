@@ -102,7 +102,16 @@ async fn main() -> Result<(), sqlx::Error> {
         .await?;
 
     create_verse_table(&pool).await?;
+    clean_table(&pool).await?;
     generate_verses_from_json(&pool).await;
+
+    return Ok(());
+}
+
+async fn clean_table(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
+    sqlx::query("TRUNCATE verses RESTART IDENTITY;")
+        .execute(pool)
+        .await?;
 
     return Ok(());
 }
