@@ -108,7 +108,7 @@ async fn main() -> Result<(), sqlx::Error> {
         Err(e) => {
             println!("Error connecting to database: {}", e);
             return Err(rocket_db_pools::sqlx::Error::from(e));
-        },
+        }
     };
 
     Ok(())
@@ -123,13 +123,16 @@ async fn seed(db_pool: &sqlx::PgPool) {
         Err(e) => println!("Error creating verses table: {}", e),
     };
 
-    // match clean_table(&db_pool).await {
-    //     Ok(_) => println!("Cleaned verses table"),
-    //     Err(e) => println!("Error cleaning verses table: {}", e),
-    // };
+    match clean_table(&db_pool).await {
+        Ok(_) => println!("Cleaned verses table"),
+        Err(e) => println!("Error cleaning verses table: {}", e),
+    };
 
     // 2) Insert the verses into the database from a JSON file
-    generate_verses_from_json(&db_pool).await;
+    match generate_verses_from_json(&db_pool).await {
+        Ok(_) => println!("Inserted verses into database"),
+        Err(e) => println!("Error inserting verses into database: {}", e),
+    };
 }
 
 async fn clean_table(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
@@ -140,7 +143,7 @@ async fn clean_table(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
     match query_result {
         Ok(_) => {
             println!("Refreshed verses table")
-        },
+        }
         Err(e) => {
             println!("Error refreshing verses table: {}", e)
         }
@@ -186,7 +189,9 @@ async fn insert_verse_into_table(
     return Ok(());
 }
 
-async fn generate_verses_from_json(pool: &sqlx::PgPool) {
+async fn generate_verses_from_json(
+    pool: &sqlx::PgPool,
+) -> Result<(), sqlx::Error> {
     /*
     Data example:
 
@@ -200,7 +205,8 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
         ...
      */
 
-    let data = std::fs::read_to_string(VERSES_JSON_PATH).unwrap();
+    let data = std::fs::read_to_string(VERSES_JSON_PATH)?;
+
     let json_data: json::Value = json::from_str(&data).unwrap();
     let verse_list = json_data.get::<&str>("data").unwrap().clone();
     let json_verses = json::from_value::<Vec<JsonBibleVerse>>(verse_list);
@@ -228,4 +234,6 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
             };
         }
     }
+
+    return Ok(());
 }
