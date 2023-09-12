@@ -119,18 +119,18 @@ async fn seed(db_pool: &sqlx::PgPool) {
 
     // Empty and refresh the `verses` table
     match create_verse_table(&db_pool).await {
-        Ok(_) => println!("Created verses table"),
+        Ok(_) => println!("Created verses table..."),
         Err(e) => println!("Error creating verses table: {}", e),
     };
 
     match clean_table(&db_pool).await {
-        Ok(_) => println!("Cleaned verses table"),
+        Ok(_) => println!("Cleaned verses table..."),
         Err(e) => println!("Error cleaning verses table: {}", e),
     };
 
     // 2) Insert the verses into the database from a JSON file
     match generate_verses_from_json(&db_pool).await {
-        Ok(_) => println!("Inserted verses into database"),
+        Ok(_) => println!("Inserted verses into database!"),
         Err(e) => println!("Error inserting verses into database: {}", e),
     };
 }
@@ -189,9 +189,7 @@ async fn insert_verse_into_table(
     return Ok(());
 }
 
-async fn generate_verses_from_json(
-    pool: &sqlx::PgPool,
-) -> Result<(), sqlx::Error> {
+async fn generate_verses_from_json(pool: &sqlx::PgPool) -> Result<(), &str> {
     /*
     Data example:
 
@@ -205,11 +203,25 @@ async fn generate_verses_from_json(
         ...
      */
 
-    let data = std::fs::read_to_string(VERSES_JSON_PATH)?;
+    let data = match std::fs::read_to_string(VERSES_JSON_PATH) {
+        Ok(data) => data,
+        Err(_) => {
+            return Err("Error reading JSON data");
+        }
+    };
 
-    let json_data: json::Value = json::from_str(&data).unwrap();
-    let verse_list = json_data.get::<&str>("data").unwrap().clone();
-    let json_verses = json::from_value::<Vec<JsonBibleVerse>>(verse_list);
+    let json_data: json::Value = match json::from_str(&data) {
+        Ok(value) => value,
+        Err(_) => {
+            return Err("Error parsing JSON data");
+        }
+    };
+    let verse_list = match json_data.get::<&str>("data") {
+        Some(value) => value,
+        None => return Err("Error getting data from JSON"),
+    };
+    let json_verses =
+        json::from_value::<Vec<JsonBibleVerse>>(verse_list.clone());
     let n_verses = json_verses.as_ref().unwrap().len();
 
     println!("Inserting {} verses into database...", n_verses);
