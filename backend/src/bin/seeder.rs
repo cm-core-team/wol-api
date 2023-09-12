@@ -97,21 +97,54 @@ struct JsonBibleVerse {
 #[tokio::main]
 async fn main() -> Result<(), sqlx::Error> {
     // 1) Create a connection pool
-    let pool = PgPoolOptions::new()
+    println!("Connecting to database...");
+    let pool_result = PgPoolOptions::new()
+        .acquire_timeout(std::time::Duration::from_secs(10))
         .connect("postgresql://postgres:postgres@localhost:5432/postgres")
-        .await?;
+        .await;
 
-    create_verse_table(&pool).await?;
-    clean_table(&pool).await?;
-    generate_verses_from_json(&pool).await;
+    match pool_result {
+        Ok(db_pool) => seed(&db_pool).await,
+        Err(e) => {
+            println!("Error connecting to database: {}", e);
+            return Err(rocket_db_pools::sqlx::Error::from(e));
+        },
+    };
 
-    return Ok(());
+    Ok(())
+}
+
+async fn seed(db_pool: &sqlx::PgPool) {
+    println!("Connected!");
+
+    // Empty and refresh the `verses` table
+    match create_verse_table(&db_pool).await {
+        Ok(_) => println!("Created verses table"),
+        Err(e) => println!("Error creating verses table: {}", e),
+    };
+
+    // match clean_table(&db_pool).await {
+    //     Ok(_) => println!("Cleaned verses table"),
+    //     Err(e) => println!("Error cleaning verses table: {}", e),
+    // };
+
+    // 2) Insert the verses into the database from a JSON file
+    generate_verses_from_json(&db_pool).await;
 }
 
 async fn clean_table(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
-    sqlx::query("TRUNCATE verses RESTART IDENTITY;")
+    let query_result = sqlx::query("TRUNCATE verses RESTART IDENTITY;")
         .execute(pool)
-        .await?;
+        .await;
+
+    match query_result {
+        Ok(_) => {
+            println!("Refreshed verses table")
+        },
+        Err(e) => {
+            println!("Error refreshing verses table: {}", e)
+        }
+    };
 
     return Ok(());
 }
@@ -155,7 +188,6 @@ async fn insert_verse_into_table(
 
 async fn generate_verses_from_json(pool: &sqlx::PgPool) {
     /*
-
     Data example:
 
     {
@@ -163,6 +195,7 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
         "chapter": 1,
         "verses": {
             "1": "In the beginning God created the heavens and the earth.",
+            ...
         },
         ...
      */
@@ -177,9 +210,9 @@ async fn generate_verses_from_json(pool: &sqlx::PgPool) {
 
     for (_i, json_verse) in json_verses.unwrap().iter().enumerate() {
         for verse_text in json_verse.verses.iter() {
-            let index_for_book_name = (json_verse.book as usize) - 1;
+            let book_name_idx = (json_verse.book as usize) - 1;
             let verse = BibleVerse {
-                book_name: BIBLE_BOOKS[index_for_book_name].to_string(),
+                book_name: BIBLE_BOOKS[book_name_idx].to_string(),
                 book_num: json_verse.book,
                 chapter: json_verse.chapter,
                 verse_num: verse_text.0.parse::<i32>().unwrap(),
