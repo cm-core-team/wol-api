@@ -8,4 +8,4 @@
 ## Running the seeder
 
 - Must be in the backend directory
-- Run `cargo run --bin seeder`
+- Run `cargo seed`
