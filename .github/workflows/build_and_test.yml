@@ -4,10 +4,12 @@ name: CI
 
 jobs:
   build_and_test:
-    name: Rust project
+    name: wol-api
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Move into project
+        run: cd backend
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
