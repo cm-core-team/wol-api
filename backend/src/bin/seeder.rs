@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use backend::models::bible_verse::BibleVerse;
 use rocket::serde::{json, Deserialize, Serialize};
 use rocket::tokio;
 use rocket_db_pools::sqlx;
@@ -78,14 +79,6 @@ const BIBLE_BOOKS: [&str; 66] = [
 #[derive(Database)]
 #[database("wol-api")]
 struct WolApiDb(sqlx::PgPool);
-
-struct BibleVerse {
-    book_num: i32,
-    book_name: String,
-    chapter: i32,
-    verse_num: i32,
-    verse_text: String,
-}
 
 #[derive(Debug, Serialize, Deserialize)]
 struct JsonBibleVerse {
