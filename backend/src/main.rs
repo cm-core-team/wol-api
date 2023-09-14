@@ -4,6 +4,9 @@ extern crate rocket;
 use rocket::serde::{json::Json, Serialize};
 // use rocket_db_pools::{sqlx, Database};
 
+#[cfg(test)]
+mod test_home;
+
 // for now
 #[get("/")]
 fn home() -> &'static str {
