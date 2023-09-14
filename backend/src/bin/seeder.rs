@@ -3,8 +3,8 @@ use std::collections::HashMap;
 use backend::models::bible_verse::BibleVerse;
 use rocket::serde::{json, Deserialize, Serialize};
 use rocket::tokio;
-use rocket_db_pools::sqlx;
-use rocket_db_pools::{sqlx::postgres::PgPoolOptions, Database};
+// use rocket_db_pools::{sqlx::postgres::PgPoolOptions, Database};
+use sqlx::{self, postgres::PgPoolOptions, Database};
 
 const VERSES_JSON_PATH: &str = "../data/verses.json";
 const BIBLE_BOOKS: [&str; 66] = [

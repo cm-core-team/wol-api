@@ -1,3 +1,6 @@
+use sqlx;
+
+#[derive(sqlx::FromRow)]
 pub struct BibleVerse {
     pub book_num: i32,
     pub book_name: String,
